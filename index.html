@@ -246,6 +246,9 @@
   /* ---------- 소식 ---------- */
   .news-list { border-top: 3px solid var(--line); }
   .news-item { display: grid; grid-template-columns: 120px 1fr auto; gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--line-soft); align-items: baseline; }
+  a.news-item { text-decoration: none; color: inherit; transition: background 0.12s; }
+  a.news-item:hover, a.news-item:focus-visible { background: #EFF2FA; outline: none; }
+  a.news-item .title { border-bottom: 2px solid var(--accent); padding-bottom: 1px; }
   @media (max-width: 700px) { .news-item { grid-template-columns: 100px 1fr; } .news-item .cat { display: none; } }
   .news-item .date { font-size: 0.82rem; font-weight: 700; color: var(--ink-soft); letter-spacing: 0.04em; }
   .news-item .title { font-size: 0.95rem; font-weight: 500; }
@@ -571,11 +574,11 @@
       <span class="eyebrow">News</span>
     </div>
     <div class="news-list">
-      <div class="news-item">
+      <a class="news-item" href="projects.html#research">
         <span class="date">2026.08.23</span>
         <span class="title">차세대컨버전스정보서비스학회 2026 하계학술대회 <b>학술우수 논문상</b> 수상 — 시민 참여형 디지털 아카이브의 참여 양상과 권한 배분 연구</span>
         <span class="cat">연구</span>
-      </div>
+      </a>
       <div class="news-item">
         <span class="date">2026.08.—</span>
         <span class="title">정기 프로그램 참가자 모집 — 신청 링크가 들어갈 자리입니다</span>
@@ -653,7 +656,7 @@
       우리 동네의 숨은 가치를 예술로 연결하는 문화예술연구소
     </div>
     <div class="admin">
-      대표: (대표자명) · 사업자등록번호: (등록번호)<br>
+      대표: 김은지<br>
       안양시 동안구 시민대로 230, B-3808<br>
       <a href="mailto:artlab.balgyeon@gmail.com">artlab.balgyeon@gmail.com</a> · <a href="tel:01051227236">010-5122-7236</a><br>
       © 커뮤니티아트랩 발견 · artlabbalgyeon.kr
