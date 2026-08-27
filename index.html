@@ -36,6 +36,7 @@
     font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
     line-height: 1.7;
     font-size: 16px;
+    word-break: keep-all; /* 한글을 단어 단위로만 줄바꿈 — 제목 뭉개짐 방지 */
   }
   .disp {
     font-family: "Black Han Sans", "Noto Sans KR", sans-serif;
@@ -223,7 +224,7 @@
   .kits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-bottom: 30px; }
   @media (max-width: 960px) { .kits { grid-template-columns: 1fr; } }
   .kit { border: 2px solid var(--bg); padding: 30px 28px; display: flex; flex-direction: column; gap: 14px; }
-  .kit h3 { margin: 0; font-size: clamp(1.8rem, 4vw, 2.6rem); font-family: "Black Han Sans", sans-serif; }
+  .kit h3 { margin: 0; font-size: clamp(1.3rem, 1.9vw, 1.65rem); line-height: 1.35; font-family: "Black Han Sans", sans-serif; letter-spacing: 0.01em; }
   .kit .meta { display: flex; gap: 8px; flex-wrap: wrap; }
   .kit .chip { font-size: 0.72rem; font-weight: 700; border: 1px solid var(--dark-muted); color: var(--dark-muted); padding: 3px 10px; }
   .kit p { margin: 0; color: var(--dark-muted); font-size: 0.9rem; flex: 1; }
