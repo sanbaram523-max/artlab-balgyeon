@@ -151,8 +151,56 @@
   .case .bd { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
   .case h3 { margin: 0; font-size: 1.1rem; font-weight: 900; line-height: 1.4; }
   .case .org { font-size: 0.83rem; color: var(--ink-soft); font-weight: 500; }
-  .case details { margin-top: auto; font-size: 0.83rem; color: var(--ink-soft); border-top: 1px solid var(--line-soft); padding-top: 10px; }
-  .case details summary { cursor: pointer; font-weight: 700; color: var(--ink); font-size: 0.8rem; letter-spacing: 0.04em; }
+  .case { cursor: pointer; transition: background 0.12s; }
+  .case:hover, .case:focus-visible { background: #F1F0FF; outline: none; }
+  .case details { display: none; }
+  .case .more-cue {
+    margin-top: auto; border-top: 1px solid var(--line-soft); padding-top: 10px;
+    font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; color: var(--accent);
+  }
+
+  /* ---------- 프로젝트 상세 오버레이 ---------- */
+  .pmodal {
+    position: fixed; inset: 0; z-index: 100; display: none;
+    background: rgba(10,10,10,0.55);
+    overflow-y: auto; padding: 4vh 16px;
+  }
+  .pmodal.open { display: block; }
+  .pmodal-box {
+    max-width: 860px; margin: 0 auto; background: var(--bg);
+    border: 3px solid var(--line);
+  }
+  .pmodal-top {
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;
+    border-bottom: 3px solid var(--line); padding: 26px 28px 22px;
+  }
+  .pmodal-top .cat { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 6px; }
+  .pmodal-top h3 { margin: 0 0 4px; font-size: clamp(1.4rem, 3.6vw, 2.1rem); font-family: "Black Han Sans", sans-serif; font-weight: 400; line-height: 1.25; }
+  .pmodal-top .org { font-size: 0.9rem; color: var(--ink-soft); font-weight: 500; }
+  .pmodal-close {
+    font: inherit; flex: none; cursor: pointer; line-height: 1;
+    width: 46px; height: 46px; font-size: 1.4rem; font-weight: 700;
+    background: var(--bg); color: var(--ink); border: 2px solid var(--ink);
+    transition: background 0.12s, color 0.12s;
+  }
+  .pmodal-close:hover, .pmodal-close:focus-visible { background: var(--ink); color: var(--bg); outline: none; }
+  .pmodal-body { padding: 24px 28px 30px; }
+  .pmodal-body dl { margin: 0 0 22px; font-size: 0.9rem; color: var(--ink-soft); display: grid; grid-template-columns: 64px 1fr; gap: 6px 12px; }
+  .pmodal-body dt { font-weight: 700; color: var(--ink); }
+  .pmodal-body dd { margin: 0; }
+  .pmodal-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  @media (max-width: 640px) { .pmodal-gallery { grid-template-columns: repeat(2, 1fr); } }
+  .pmodal-gallery .gph {
+    aspect-ratio: 4 / 3; border: 1px solid var(--line-soft);
+    background: repeating-linear-gradient(45deg, #F4F4F4, #F4F4F4 12px, #ECECEC 12px, #ECECEC 24px);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; color: var(--ink-soft); text-transform: uppercase;
+  }
+  .pmodal-gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border: 1px solid var(--line-soft); display: block; }
+  .pmodal-note { margin: 18px 0 0; font-size: 0.78rem; color: var(--ink-soft); }
+  .pmodal-cta { margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--line-soft); display: flex; gap: 12px; flex-wrap: wrap; }
+  body.modal-open { overflow: hidden; }
+
   .case dl { margin: 8px 0 0; font-size: 0.83rem; color: var(--ink-soft); display: grid; grid-template-columns: 56px 1fr; gap: 4px 10px; }
   .case dt { font-weight: 700; color: var(--ink); }
   .case dd { margin: 0; }
@@ -373,6 +421,7 @@
           <details><summary>자세히</summary>
             <dl><dt>과업</dt><dd>양성과정 커리큘럼 설계·운영, 네트워크 활성화 프로그램</dd></dl>
           </details>
+          <span class="more-cue">자세히 보기 →</span>
         </div>
       </div>
       <div class="case" data-cat="train archive">
@@ -384,6 +433,7 @@
           <details><summary>자세히</summary>
             <dl><dt>과업</dt><dd>주민을 모아 동네를 직접 기록하는 모임을 꾸리고 운영. 주민이 활동의 주체로 남는 기록공동체.</dd></dl>
           </details>
+          <span class="more-cue">자세히 보기 →</span>
         </div>
       </div>
       <div class="case" data-cat="archive pub">
@@ -395,6 +445,7 @@
           <details><summary>자세히</summary>
             <dl><dt>과업</dt><dd>공동체의 역사와 기억을 주민과 함께 책·기록물로 제작</dd></dl>
           </details>
+          <span class="more-cue">자세히 보기 →</span>
         </div>
       </div>
       <div class="case" data-cat="edu">
@@ -406,6 +457,7 @@
           <details><summary>자세히</summary>
             <dl><dt>과업</dt><dd>부들이야기·둠벙이야기 참여작가, 지지배배 기획·운영. 교육과 전시 연계.</dd></dl>
           </details>
+          <span class="more-cue">자세히 보기 →</span>
         </div>
       </div>
       <div class="case" data-cat="edu">
@@ -417,6 +469,7 @@
           <details><summary>자세히</summary>
             <dl><dt>과업</dt><dd>소장품 기반 참여형 교육 프로그램·교재 개발</dd></dl>
           </details>
+          <span class="more-cue">자세히 보기 →</span>
         </div>
       </div>
       <div class="case" data-cat="edu">
@@ -428,6 +481,7 @@
           <details><summary>자세히</summary>
             <dl><dt>과업</dt><dd>민속화 소재 전통놀이 교육 프로그램 개발·운영</dd></dl>
           </details>
+          <span class="more-cue">자세히 보기 →</span>
         </div>
       </div>
       <div class="case" data-cat="edu">
@@ -439,6 +493,7 @@
           <details><summary>자세히</summary>
             <dl><dt>과업</dt><dd>가족 대상 숲체험·생태체험 프로그램 강의. 음성 꽃동네(2023~2025), 음성-진천 평생학습공유플랫폼 협력.</dd></dl>
           </details>
+          <span class="more-cue">자세히 보기 →</span>
         </div>
       </div>
       <div class="case" data-cat="exhibit">
@@ -450,6 +505,7 @@
           <details><summary>자세히</summary>
             <dl><dt>과업</dt><dd>공공예술 프로젝트 참여작가로 작품 제작·운영</dd></dl>
           </details>
+          <span class="more-cue">자세히 보기 →</span>
         </div>
       </div>
       <div class="case" data-cat="exhibit archive">
@@ -461,6 +517,7 @@
           <details><summary>자세히</summary>
             <dl><dt>과업</dt><dd>시민 참여 아카이브 기획·전시</dd></dl>
           </details>
+          <span class="more-cue">자세히 보기 →</span>
         </div>
       </div>
       <div class="case" data-cat="exhibit pub">
@@ -472,6 +529,7 @@
           <details><summary>자세히</summary>
             <dl><dt>과업</dt><dd>전시 및 아트북 제작</dd></dl>
           </details>
+          <span class="more-cue">자세히 보기 →</span>
         </div>
       </div>
       <div class="case" data-cat="pub">
@@ -483,6 +541,7 @@
           <details><summary>자세히</summary>
             <dl><dt>과업</dt><dd>지역 탐조 안내서 기획·제작</dd></dl>
           </details>
+          <span class="more-cue">자세히 보기 →</span>
         </div>
       </div>
       <div class="case" data-cat="pub edu">
@@ -494,6 +553,7 @@
           <details><summary>자세히</summary>
             <dl><dt>과업</dt><dd>경기도 역사탐험대, 우리동네 탐험대 등 지역 역사·문화 보드게임 교구 개발</dd></dl>
           </details>
+          <span class="more-cue">자세히 보기 →</span>
         </div>
       </div>
     </div>
@@ -639,6 +699,27 @@
   </div>
 </footer>
 
+<div class="pmodal" id="pmodal" role="dialog" aria-modal="true" aria-labelledby="pmodal-title">
+  <div class="pmodal-box">
+    <div class="pmodal-top">
+      <div>
+        <span class="cat" id="pmodal-cat"></span>
+        <h3 id="pmodal-title"></h3>
+        <span class="org" id="pmodal-org"></span>
+      </div>
+      <button class="pmodal-close" id="pmodal-close" type="button" aria-label="닫기">✕</button>
+    </div>
+    <div class="pmodal-body">
+      <div id="pmodal-meta"></div>
+      <div class="pmodal-gallery" id="pmodal-gallery"></div>
+      <p class="pmodal-note">활동 사진이 준비되는 대로 이 자리에 채워집니다.</p>
+      <div class="pmodal-cta">
+        <a class="btn sm fill" href="#contact" id="pmodal-contact">이런 사업 문의하기</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 (function () {
   var btns = document.querySelectorAll('.filter-btn');
@@ -674,6 +755,68 @@
     var sec = document.getElementById('works');
     if (sec) sec.scrollIntoView();
   }
+
+  /* ---------- 프로젝트 상세 오버레이 ---------- */
+  var modal = document.getElementById('pmodal');
+  var mCat = document.getElementById('pmodal-cat');
+  var mTitle = document.getElementById('pmodal-title');
+  var mOrg = document.getElementById('pmodal-org');
+  var mMeta = document.getElementById('pmodal-meta');
+  var mGal = document.getElementById('pmodal-gallery');
+  var lastFocus = null;
+
+  function openModal(card) {
+    mCat.textContent = card.querySelector('.eyebrow').textContent;
+    mTitle.textContent = card.querySelector('h3').textContent;
+    var org = card.querySelector('.org');
+    mOrg.textContent = org ? org.textContent : '';
+    mMeta.innerHTML = '';
+    var dl = card.querySelector('details dl');
+    if (dl) mMeta.appendChild(dl.cloneNode(true));
+    mGal.innerHTML = '';
+    // data-photos="a.jpg,b.jpg" 를 카드에 달면 실제 사진, 없으면 자리표시 6칸
+    var photos = (card.dataset.photos || '').split(',').filter(Boolean);
+    if (photos.length) {
+      photos.forEach(function (src) {
+        var img = document.createElement('img');
+        img.src = src.trim();
+        img.alt = mTitle.textContent + ' 활동 사진';
+        mGal.appendChild(img);
+      });
+    } else {
+      for (var i = 1; i <= 6; i++) {
+        var d = document.createElement('div');
+        d.className = 'gph';
+        d.textContent = '활동 사진 ' + i;
+        mGal.appendChild(d);
+      }
+    }
+    lastFocus = card;
+    modal.classList.add('open');
+    document.body.classList.add('modal-open');
+    document.getElementById('pmodal-close').focus();
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.classList.remove('modal-open');
+    if (lastFocus) lastFocus.focus();
+  }
+
+  cards.forEach(function (card) {
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    card.addEventListener('click', function () { openModal(card); });
+    card.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(card); }
+    });
+  });
+  document.getElementById('pmodal-close').addEventListener('click', closeModal);
+  document.getElementById('pmodal-contact').addEventListener('click', closeModal);
+  modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
 })();
 </script>
 
