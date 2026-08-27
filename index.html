@@ -220,8 +220,8 @@
   .dark-sec h2.sec-title { color: var(--bg); }
   .dark-sec .eyebrow { color: var(--dark-accent); }
   .dark-sec .sec-sub { color: var(--dark-muted); }
-  .kits { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 30px; }
-  @media (max-width: 860px) { .kits { grid-template-columns: 1fr; } }
+  .kits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-bottom: 30px; }
+  @media (max-width: 960px) { .kits { grid-template-columns: 1fr; } }
   .kit { border: 2px solid var(--bg); padding: 30px 28px; display: flex; flex-direction: column; gap: 14px; }
   .kit h3 { margin: 0; font-size: clamp(1.8rem, 4vw, 2.6rem); font-family: "Black Han Sans", sans-serif; }
   .kit .meta { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -579,8 +579,8 @@
   <div class="wrap sec-inner">
     <div class="sec-head">
       <h2 class="sec-title disp">역사를 갖고 논다</h2>
-      <span class="eyebrow">Learning Kits</span>
-      <p class="sec-sub">지역의 역사와 이야기를 놀이로 배우는 교구입니다. 교구만 구매해 직접 활용하거나, 강사가 함께하는 운영 프로그램으로 진행할 수 있습니다.</p>
+      <span class="eyebrow">Kits &amp; Books</span>
+      <p class="sec-sub">지역의 역사와 이야기를 놀이로 배우는 교구, 그리고 동네를 기록한 책입니다. 교구는 직접 활용하거나 강사가 함께하는 운영 프로그램으로 진행할 수 있습니다.</p>
     </div>
     <div class="kits">
       <div class="kit">
@@ -613,6 +613,21 @@
         <div class="row">
           <a class="btn naver" href="mailto:artlab.balgyeon@gmail.com?subject=%5B%EA%B5%90%EA%B5%AC%20%EA%B5%AC%EB%A7%A4%20%EB%AC%B8%EC%9D%98%5D%20%EC%9A%B0%EB%A6%AC%EB%8F%99%EB%84%A4%20%ED%83%90%ED%97%98%EB%8C%80">구매 문의하기</a>
           <a class="btn" href="#contact">수업 운영 의뢰</a>
+        </div>
+      </div>
+      <div class="kit">
+        <span class="eyebrow">Book · 발행물</span>
+        <h3>우리동네 취미탐조 왕송호수</h3>
+        <div class="meta">
+          <span class="chip">탐조 안내서</span><span class="chip">출간 5년 스테디</span>
+        </div>
+        <p>왕송호수의 새들을 관찰하며 동네를 다시 발견하는 취미탐조 안내서. 5년째 꾸준히 읽히고 있는 발견의 대표 발행물입니다.</p>
+        <details>
+          <summary>어떤 책인가요?</summary>
+          <p>책 소개와 목차, 독자 후기가 들어갈 자리입니다.</p>
+        </details>
+        <div class="row">
+          <a class="btn naver" href="https://smartstore.naver.com/eddanggo" target="_blank" rel="noopener">네이버 스마트스토어에서 구매</a>
         </div>
       </div>
     </div>
