@@ -14,7 +14,7 @@
     --ink-soft: #555555;
     --line: #0A0A0A;
     --line-soft: #DADADA;
-    --accent: #2314FF;
+    --accent: #002FA7; /* 인터내셔널 클라인 블루 — 쌩파랑 대신 깊고 차분한 미술관의 파랑 */
     --accent-ink: #FFFFFF;
     --naver: #03C75A;
     --dark-muted: #BBBBBB;
@@ -51,15 +51,12 @@
   nav.gnb a { text-decoration: none; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; }
   nav.gnb a:hover, nav.gnb a:focus-visible { color: var(--accent); outline: none; }
 
-  /* ---------- ticker ---------- */
-  .ticker { background: var(--ink); color: var(--bg); overflow: hidden; }
-  .ticker-inner {
-    display: flex; gap: 64px; white-space: nowrap; padding: 9px 0;
+  /* ---------- 고정 안내 띠 ---------- */
+  .ticker { background: var(--ink); color: var(--bg); }
+  .ticker-static {
+    padding: 9px 24px; text-align: center;
     font-size: 0.78rem; font-weight: 500; letter-spacing: 0.14em;
-    animation: tick 26s linear infinite; width: max-content;
   }
-  @keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-  @media (prefers-reduced-motion: reduce) { .ticker-inner { animation: none; } }
 
   /* ---------- hero ---------- */
   .hero { border-bottom: 3px solid var(--line); }
@@ -292,7 +289,7 @@
         </g>
         <circle cx="24.5" cy="24.5" r="9" fill="none" stroke="currentColor" stroke-width="4.5"/>
       </svg>
-      <span><span style="font-family:'Noto Sans KR',sans-serif; font-weight:700; font-size:0.85rem;">커뮤니티아트랩</span> 발견</span>
+      <span style="display:inline-flex; align-items:baseline; gap:7px;"><span style="font-family:'Noto Sans KR',sans-serif; font-weight:700; font-size:0.85rem;">커뮤니티아트랩</span><span>발견</span></span>
     </a>
     <nav class="gnb">
       <a href="#paths">하는 일</a>
@@ -305,11 +302,8 @@
   </div>
 </header>
 
-<div class="ticker" aria-hidden="true">
-  <div class="ticker-inner">
-    <span>정기 프로그램 참가자 모집 중</span><span>COMMUNITY ART LAB BALGYEON</span><span>우리 동네의 숨은 가치를 예술로</span><span>ANYANG · GYEONGGI</span>
-    <span>정기 프로그램 참가자 모집 중</span><span>COMMUNITY ART LAB BALGYEON</span><span>우리 동네의 숨은 가치를 예술로</span><span>ANYANG · GYEONGGI</span>
-  </div>
+<div class="ticker">
+  <div class="ticker-static">정기 프로그램 참가자 모집 중 · COMMUNITY ART LAB BALGYEON</div>
 </div>
 
 <div class="hero" id="top">
