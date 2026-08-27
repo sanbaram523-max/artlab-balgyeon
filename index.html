@@ -668,21 +668,25 @@
         </div>
         <a class="btn sm" href="#" aria-disabled="true">연구소 소개자료(PDF) 내려받기</a>
       </div>
-      <form class="cform" action="mailto:artlab.balgyeon@gmail.com" method="get">
+      <form class="cform" action="https://formsubmit.co/artlab.balgyeon@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="[아트랩 발견 홈페이지] 새 문의가 도착했습니다">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://artlabbalgyeon.kr/thanks.html">
         <label>성함과 소속
-          <input type="text" name="name" placeholder="예) 김OO / OO문화재단">
+          <input type="text" name="성함과 소속" placeholder="예) 김OO / OO문화재단" required>
         </label>
         <label>연락처
-          <input type="text" name="contact" placeholder="이메일 또는 전화번호">
+          <input type="text" name="연락처" placeholder="이메일 또는 전화번호" required>
         </label>
         <label>어떤 일을 검토 중이신가요?
-          <input type="text" name="type" placeholder="예) 강사 양성과정 / 마을기록 사업 / 교구 단체구매">
+          <input type="text" name="검토 중인 일" placeholder="예) 강사 양성과정 / 마을기록 사업 / 교구 단체구매">
         </label>
         <label>내용
-          <textarea name="body" placeholder="편하게 적어 주세요. 정리되지 않은 아이디어도 좋습니다."></textarea>
+          <textarea name="문의 내용" placeholder="편하게 적어 주세요. 정리되지 않은 아이디어도 좋습니다."></textarea>
         </label>
         <button type="submit">문의 보내기</button>
-        <p class="note">보내주신 문의는 이메일로 접수되며, 확인 후 회신드립니다. (실제 배포 시 폼 전송 서비스 연결)</p>
+        <p class="note">보내주신 문의는 이메일로 접수되며, 확인 후 회신드립니다.</p>
       </form>
     </div>
   </div>
