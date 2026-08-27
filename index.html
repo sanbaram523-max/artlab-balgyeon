@@ -35,6 +35,8 @@
     font-weight: 400; line-height: 1.1; letter-spacing: 0.005em;
   }
   .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+  /* .sec-inner 등의 padding 축약형이 가로 여백을 0으로 덮는 것 방지 (div.wrap이 특이도에서 이김) */
+  div.wrap { padding-left: 24px; padding-right: 24px; }
   a { color: inherit; }
   .eyebrow {
     font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em;
