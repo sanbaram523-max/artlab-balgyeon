@@ -53,10 +53,13 @@
 
   /* ---------- 고정 안내 띠 ---------- */
   .ticker { background: var(--ink); color: var(--bg); }
-  .ticker-static {
+  a.ticker-static {
+    display: block; color: var(--bg); text-decoration: none;
     padding: 9px 24px; text-align: center;
     font-size: 0.78rem; font-weight: 500; letter-spacing: 0.14em;
   }
+  a.ticker-static:hover, a.ticker-static:focus-visible { color: #9DA8FF; outline: none; }
+  a.ticker-static .go { color: #9DA8FF; font-weight: 700; }
 
   /* ---------- hero ---------- */
   .hero { border-bottom: 3px solid var(--line); }
@@ -303,7 +306,7 @@
 </header>
 
 <div class="ticker">
-  <div class="ticker-static">정기 프로그램 참가자 모집 중 · COMMUNITY ART LAB BALGYEON</div>
+  <a class="ticker-static" href="#news">정기 프로그램 참가자 모집 중 · COMMUNITY ARTLAB BALGYEON <span class="go">모집 안내 보기 →</span></a>
 </div>
 
 <div class="hero" id="top">
@@ -696,7 +699,7 @@
   <div class="wrap foot-grid">
     <div class="org">
       <b>아트랩 발견</b>
-      커뮤니티아트랩 발견 · Community Art Lab Balgyeon<br>
+      커뮤니티아트랩 발견 · Community Artlab Balgyeon<br>
       우리 동네의 숨은 가치를 예술로 연결하는 문화예술연구소
     </div>
     <div class="admin">
