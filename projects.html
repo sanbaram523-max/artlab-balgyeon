@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>프로젝트 — 커뮤니티아트랩 발견</title>
+<meta name="description" content="커뮤니티아트랩 발견이 해온 일 전체 — 양성, 마을기록, 연구, 교육, 전시, 발행·교구">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+<style>
+  :root {
+    --bg: #FFFFFF; --ink: #0A0A0A; --ink-soft: #555555;
+    --line: #0A0A0A; --line-soft: #DADADA;
+    --accent: #002FA7; --accent-ink: #FFFFFF;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; line-height: 1.7; font-size: 16px; }
+  .disp { font-family: "Black Han Sans", "Noto Sans KR", sans-serif; font-weight: 400; line-height: 1.1; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+  div.wrap { padding-left: 24px; padding-right: 24px; }
+  a { color: inherit; }
+  .eyebrow { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
+
+  .topbar { border-bottom: 3px solid var(--line); position: sticky; top: 0; background: var(--bg); z-index: 40; }
+  .topbar-inner { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; gap: 16px; flex-wrap: wrap; }
+  .wordmark { font-size: 1.15rem; text-decoration: none; display: flex; align-items: center; gap: 9px; }
+  .back { text-decoration: none; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; }
+  .back:hover { color: var(--accent); }
+
+  .head { border-bottom: 3px solid var(--line); }
+  .head-inner { padding: 46px 0 40px; }
+  .head h1 { margin: 0 0 10px; font-size: clamp(2.2rem, 6vw, 3.6rem); text-transform: uppercase; }
+  .head p { margin: 0; color: var(--ink-soft); max-width: 44em; font-size: 0.94rem; }
+
+  .sec-inner { padding: 40px 0 72px; }
+  .filters { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+  .filter-btn { font: inherit; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.04em; padding: 10px 20px; cursor: pointer; background: var(--bg); color: var(--ink); border: 2px solid var(--ink); transition: background 0.12s, color 0.12s; }
+  .filter-btn:hover, .filter-btn:focus-visible { background: #EFF2FA; outline: none; }
+  .filter-btn.on { background: var(--ink); color: var(--bg); }
+  .filter-btn .n { color: var(--accent); margin-left: 6px; }
+  .filter-btn.on .n { color: #9DA8FF; }
+
+  .cases { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 3px solid var(--line); border-left: 1px solid var(--line-soft); }
+  @media (max-width: 900px) { .cases { grid-template-columns: 1fr; border-left: none; } }
+  .case { border-bottom: 1px solid var(--line-soft); border-right: 1px solid var(--line-soft); display: flex; flex-direction: column; cursor: pointer; transition: background 0.12s; }
+  @media (max-width: 900px) { .case { border-right: none; } }
+  .case:hover, .case:focus-visible { background: #EFF2FA; outline: none; }
+  .case.hidden { display: none; }
+  .case .ph { height: 130px; border-bottom: 1px solid var(--line-soft); background: repeating-linear-gradient(45deg, #F4F4F4, #F4F4F4 14px, #ECECEC 14px, #ECECEC 28px); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; color: var(--ink-soft); text-transform: uppercase; }
+  .case .bd { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .case h3 { margin: 0; font-size: 1.1rem; font-weight: 900; line-height: 1.4; }
+  .case .org { font-size: 0.83rem; color: var(--ink-soft); font-weight: 500; }
+  .case details { display: none; }
+  .case .more-cue { margin-top: auto; border-top: 1px solid var(--line-soft); padding-top: 10px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; color: var(--accent); }
+  .case dl { margin: 8px 0 0; font-size: 0.83rem; color: var(--ink-soft); display: grid; grid-template-columns: 56px 1fr; gap: 4px 10px; }
+  .case dt { font-weight: 700; color: var(--ink); }
+  .case dd { margin: 0; }
+
+  .pmodal { position: fixed; inset: 0; z-index: 100; display: none; background: rgba(10,10,10,0.55); overflow-y: auto; padding: 4vh 16px; }
+  .pmodal.open { display: block; }
+  .pmodal-box { max-width: 860px; margin: 0 auto; background: var(--bg); border: 3px solid var(--line); }
+  .pmodal-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; border-bottom: 3px solid var(--line); padding: 26px 28px 22px; }
+  .pmodal-top .cat { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 6px; }
+  .pmodal-top h3 { margin: 0 0 4px; font-size: clamp(1.4rem, 3.6vw, 2.1rem); font-family: "Black Han Sans", sans-serif; font-weight: 400; line-height: 1.25; }
+  .pmodal-top .org { font-size: 0.9rem; color: var(--ink-soft); font-weight: 500; }
+  .pmodal-close { font: inherit; flex: none; cursor: pointer; line-height: 1; width: 46px; height: 46px; font-size: 1.4rem; font-weight: 700; background: var(--bg); color: var(--ink); border: 2px solid var(--ink); transition: background 0.12s, color 0.12s; }
+  .pmodal-close:hover, .pmodal-close:focus-visible { background: var(--ink); color: var(--bg); outline: none; }
+  .pmodal-body { padding: 24px 28px 30px; }
+  .pmodal-body dl { margin: 0 0 22px; font-size: 0.9rem; color: var(--ink-soft); display: grid; grid-template-columns: 64px 1fr; gap: 6px 12px; }
+  .pmodal-body dt { font-weight: 700; color: var(--ink); }
+  .pmodal-body dd { margin: 0; }
+  .pmodal-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  @media (max-width: 640px) { .pmodal-gallery { grid-template-columns: repeat(2, 1fr); } }
+  .pmodal-gallery .gph { aspect-ratio: 4/3; border: 1px solid var(--line-soft); background: repeating-linear-gradient(45deg, #F4F4F4, #F4F4F4 12px, #ECECEC 12px, #ECECEC 24px); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; color: var(--ink-soft); text-transform: uppercase; }
+  .pmodal-gallery img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border: 1px solid var(--line-soft); display: block; }
+  .pmodal-note { margin: 18px 0 0; font-size: 0.78rem; color: var(--ink-soft); }
+  .pmodal-cta { margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--line-soft); display: flex; gap: 12px; flex-wrap: wrap; }
+  body.modal-open { overflow: hidden; }
+  .btn { display: inline-block; text-decoration: none; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.06em; padding: 12px 22px; border: 2px solid var(--ink); color: var(--ink); background: var(--bg); transition: background 0.12s, color 0.12s; }
+  .btn:hover, .btn:focus-visible { background: var(--ink); color: var(--bg); outline: none; }
+  .btn.fill { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .btn.fill:hover, .btn.fill:focus-visible { background: var(--ink); border-color: var(--ink); }
+
+  footer { border-top: 3px solid var(--line); padding: 26px 0 60px; }
+  .foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; color: var(--ink-soft); }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="wordmark disp" href="/">
+      <svg width="22" height="22" viewBox="0 0 100 100" aria-hidden="true">
+        <g fill="currentColor"><circle cx="50" cy="14" r="9"/><circle cx="75.5" cy="24.5" r="9"/><circle cx="86" cy="50" r="9"/><circle cx="75.5" cy="75.5" r="9"/><circle cx="50" cy="86" r="9"/><circle cx="24.5" cy="75.5" r="9"/><circle cx="14" cy="50" r="9"/></g>
+        <circle cx="24.5" cy="24.5" r="9" fill="none" stroke="currentColor" stroke-width="4.5"/>
+      </svg>
+      <span><span style="font-family:'Noto Sans KR',sans-serif; font-weight:700; font-size:0.8rem;">커뮤니티아트랩</span> 발견</span>
+    </a>
+    <a class="back" href="/">← 홈으로</a>
+  </div>
+</header>
+
+<div class="head">
+  <div class="wrap head-inner">
+    <h1 class="disp">전체 프로젝트</h1>
+    <p>발견이 해온 일 전부입니다. 분야를 누르면 그 일들만 모아 볼 수 있고, 카드를 누르면 자세한 내용과 활동 사진을 볼 수 있습니다.</p>
+  </div>
+</div>
+
+<div class="wrap sec-inner">
+  <div class="filters" id="filters">
+    <button class="filter-btn on" data-f="all" type="button">전체</button>
+    <button class="filter-btn" data-f="train" type="button">사람 기르기</button>
+    <button class="filter-btn" data-f="archive" type="button">마을 기록</button>
+    <button class="filter-btn" data-f="research" type="button">연구</button>
+    <button class="filter-btn" data-f="edu" type="button">교육</button>
+    <button class="filter-btn" data-f="exhibit" type="button">전시·예술</button>
+    <button class="filter-btn" data-f="pub" type="button">발행·교구</button>
+  </div>
+  <div class="cases" id="cases">
+    <div class="case" data-cat="train">
+      <div class="ph">Photo</div>
+      <div class="bd">
+        <span class="eyebrow">사람 기르기</span>
+        <h3>문화해설사 양성과정</h3>
+        <span class="org">의왕시평생학습관</span>
+        <details><summary>자세히</summary><dl><dt>과업</dt><dd>양성과정 커리큘럼 설계·운영, 네트워크 활성화 프로그램</dd></dl></details>
+        <span class="more-cue">자세히 보기 →</span>
+      </div>
+    </div>
+    <div class="case" data-cat="train archive">
+      <div class="ph">Photo</div>
+      <div class="bd">
+        <span class="eyebrow">사람 기르기 · 마을 기록</span>
+        <h3>의왕마을생태연구회</h3>
+        <span class="org">시민 기록단 운영</span>
+        <details><summary>자세히</summary><dl><dt>과업</dt><dd>주민을 모아 동네를 직접 기록하는 모임을 꾸리고 운영. 주민이 활동의 주체로 남는 기록공동체.</dd></dl></details>
+        <span class="more-cue">자세히 보기 →</span>
+      </div>
+    </div>
+    <div class="case" data-cat="research archive">
+      <div class="ph">Photo — 상장·발표 사진</div>
+      <div class="bd">
+        <span class="eyebrow">연구 · 학술</span>
+        <h3>시민 참여형 디지털 아카이브 연구</h3>
+        <span class="org">차세대컨버전스정보서비스학회 · 2026 학술우수 논문상</span>
+        <details><summary>자세히</summary><dl><dt>논문</dt><dd>「시민 참여형 디지털 아카이브의 참여 양상과 권한 배분 — 익산시민역사기록관 '함께 만드는 지도' 사례를 중심으로」. 2026 하계학술대회 우수논문 선정 (2026.08.23).</dd></dl></details>
+        <span class="more-cue">자세히 보기 →</span>
+      </div>
+    </div>
+    <div class="case" data-cat="archive pub">
+      <div class="ph">Photo</div>
+      <div class="bd">
+        <span class="eyebrow">마을 기록</span>
+        <h3>청계동 마을지</h3>
+        <span class="org">주민 참여 마을지·구술사 제작</span>
+        <details><summary>자세히</summary><dl><dt>과업</dt><dd>공동체의 역사와 기억을 주민과 함께 책·기록물로 제작</dd></dl></details>
+        <span class="more-cue">자세히 보기 →</span>
+      </div>
+    </div>
+    <div class="case" data-cat="edu">
+      <div class="ph">Photo</div>
+      <div class="bd">
+        <span class="eyebrow">교육</span>
+        <h3>꿈다락토요문화학교 〈왕송못순환랩〉</h3>
+        <span class="org">한국문화예술교육진흥원 · 의왕시중앙도서관</span>
+        <details><summary>자세히</summary><dl><dt>과업</dt><dd>부들이야기·둠벙이야기 참여작가, 지지배배 기획·운영. 교육과 전시 연계.</dd></dl></details>
+        <span class="more-cue">자세히 보기 →</span>
+      </div>
+    </div>
+    <div class="case" data-cat="edu">
+      <div class="ph">Photo</div>
+      <div class="bd">
+        <span class="eyebrow">교육 · 박물관</span>
+        <h3>〈내가 본 이슬람, 유물이 말하는 이슬람〉</h3>
+        <span class="org">국립중앙박물관 이슬람실</span>
+        <details><summary>자세히</summary><dl><dt>과업</dt><dd>소장품 기반 참여형 교육 프로그램·교재 개발</dd></dl></details>
+        <span class="more-cue">자세히 보기 →</span>
+      </div>
+    </div>
+    <div class="case" data-cat="edu">
+      <div class="ph">Photo</div>
+      <div class="bd">
+        <span class="eyebrow">교육 · 전통문화</span>
+        <h3>기산 김준근의 민속화로 알아보는 전통놀이</h3>
+        <span class="org">참여형 교육 프로그램</span>
+        <details><summary>자세히</summary><dl><dt>과업</dt><dd>민속화 소재 전통놀이 교육 프로그램 개발·운영</dd></dl></details>
+        <span class="more-cue">자세히 보기 →</span>
+      </div>
+    </div>
+    <div class="case" data-cat="edu">
+      <div class="ph">Photo</div>
+      <div class="bd">
+        <span class="eyebrow">교육 · 생태</span>
+        <h3>가족숲체험·생태체험 프로그램</h3>
+        <span class="org">충북혁신도시 · 2025</span>
+        <details><summary>자세히</summary><dl><dt>과업</dt><dd>가족 대상 숲체험·생태체험 프로그램 강의. 음성 꽃동네(2023~2025), 음성-진천 평생학습공유플랫폼 협력.</dd></dl></details>
+        <span class="more-cue">자세히 보기 →</span>
+      </div>
+    </div>
+    <div class="case" data-cat="exhibit">
+      <div class="ph">Photo</div>
+      <div class="bd">
+        <span class="eyebrow">전시·예술</span>
+        <h3>공공예술프로젝트 〈우리마을미술: 월암별곡〉</h3>
+        <span class="org">월암다이어리·월암랩소디 참여작가</span>
+        <details><summary>자세히</summary><dl><dt>과업</dt><dd>공공예술 프로젝트 참여작가로 작품 제작·운영</dd></dl></details>
+        <span class="more-cue">자세히 보기 →</span>
+      </div>
+    </div>
+    <div class="case" data-cat="exhibit archive">
+      <div class="ph">Photo</div>
+      <div class="bd">
+        <span class="eyebrow">전시·예술 · 기록</span>
+        <h3>당신의 봄을 나누어 봄 아카이브</h3>
+        <span class="org">아카이브 전시</span>
+        <details><summary>자세히</summary><dl><dt>과업</dt><dd>시민 참여 아카이브 기획·전시</dd></dl></details>
+        <span class="more-cue">자세히 보기 →</span>
+      </div>
+    </div>
+    <div class="case" data-cat="exhibit pub">
+      <div class="ph">Photo</div>
+      <div class="bd">
+        <span class="eyebrow">전시·예술 · 발행</span>
+        <h3>《왕송호수 담은 수첩》</h3>
+        <span class="org">터무니책방</span>
+        <details><summary>자세히</summary><dl><dt>과업</dt><dd>전시 및 아트북 제작</dd></dl></details>
+        <span class="more-cue">자세히 보기 →</span>
+      </div>
+    </div>
+    <div class="case" data-cat="pub">
+      <div class="ph">Photo</div>
+      <div class="bd">
+        <span class="eyebrow">발행</span>
+        <h3>『우리동네 취미탐조 왕송호수』</h3>
+        <span class="org">독립출판 · 출간 5년</span>
+        <details><summary>자세히</summary><dl><dt>과업</dt><dd>지역 탐조 안내서 기획·제작. 5년째 꾸준히 판매 중인 대표 발행물.</dd></dl></details>
+        <span class="more-cue">자세히 보기 →</span>
+      </div>
+    </div>
+    <div class="case" data-cat="pub edu">
+      <div class="ph">Photo</div>
+      <div class="bd">
+        <span class="eyebrow">발행·교구</span>
+        <h3>지역 역사 보드게임 교구 개발</h3>
+        <span class="org">석수청소년문화의집 · 의왕문화원</span>
+        <details><summary>자세히</summary><dl><dt>과업</dt><dd>경기도 역사탐험 키트, 우리동네 탐험대 등 지역 역사·문화 보드게임 교구 개발</dd></dl></details>
+        <span class="more-cue">자세히 보기 →</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 커뮤니티아트랩 발견</span>
+    <span><a href="/" style="text-decoration:none;">ARTLABBALGYEON.KR</a></span>
+  </div>
+</footer>
+
+<div class="pmodal" id="pmodal" role="dialog" aria-modal="true" aria-labelledby="pmodal-title">
+  <div class="pmodal-box">
+    <div class="pmodal-top">
+      <div>
+        <span class="cat" id="pmodal-cat"></span>
+        <h3 id="pmodal-title"></h3>
+        <span class="org" id="pmodal-org"></span>
+      </div>
+      <button class="pmodal-close" id="pmodal-close" type="button" aria-label="닫기">✕</button>
+    </div>
+    <div class="pmodal-body">
+      <div id="pmodal-meta"></div>
+      <div class="pmodal-gallery" id="pmodal-gallery"></div>
+      <p class="pmodal-note">활동 사진이 준비되는 대로 이 자리에 채워집니다.</p>
+      <div class="pmodal-cta">
+        <a class="btn fill" href="/#contact" id="pmodal-contact">이런 사업 문의하기</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var btns = document.querySelectorAll('.filter-btn');
+  var cards = document.querySelectorAll('#cases .case');
+
+  function apply(f) {
+    btns.forEach(function (b) { b.classList.toggle('on', b.dataset.f === f); });
+    cards.forEach(function (c) {
+      var cats = c.dataset.cat.split(' ');
+      c.classList.toggle('hidden', f !== 'all' && cats.indexOf(f) === -1);
+    });
+  }
+
+  btns.forEach(function (b) {
+    var n = 0;
+    cards.forEach(function (c) {
+      if (b.dataset.f === 'all' || c.dataset.cat.split(' ').indexOf(b.dataset.f) !== -1) n++;
+    });
+    var s = document.createElement('span');
+    s.className = 'n'; s.textContent = n; b.appendChild(s);
+    b.addEventListener('click', function () {
+      apply(b.dataset.f);
+      if (history.replaceState) history.replaceState(null, '', '#' + b.dataset.f);
+    });
+  });
+
+  var m = location.hash.match(/^#(\w+)$/);
+  if (m && ['all','train','archive','research','edu','exhibit','pub'].indexOf(m[1]) !== -1) apply(m[1]);
+
+  var modal = document.getElementById('pmodal');
+  var mCat = document.getElementById('pmodal-cat');
+  var mTitle = document.getElementById('pmodal-title');
+  var mOrg = document.getElementById('pmodal-org');
+  var mMeta = document.getElementById('pmodal-meta');
+  var mGal = document.getElementById('pmodal-gallery');
+  var lastFocus = null;
+
+  function openModal(card) {
+    mCat.textContent = card.querySelector('.eyebrow').textContent;
+    mTitle.textContent = card.querySelector('h3').textContent;
+    var org = card.querySelector('.org');
+    mOrg.textContent = org ? org.textContent : '';
+    mMeta.innerHTML = '';
+    var dl = card.querySelector('details dl');
+    if (dl) mMeta.appendChild(dl.cloneNode(true));
+    mGal.innerHTML = '';
+    var photos = (card.dataset.photos || '').split(',').filter(Boolean);
+    if (photos.length) {
+      photos.forEach(function (src) {
+        var img = document.createElement('img');
+        img.src = src.trim(); img.alt = mTitle.textContent + ' 활동 사진';
+        mGal.appendChild(img);
+      });
+    } else {
+      for (var i = 1; i <= 6; i++) {
+        var d = document.createElement('div');
+        d.className = 'gph'; d.textContent = '활동 사진 ' + i;
+        mGal.appendChild(d);
+      }
+    }
+    lastFocus = card;
+    modal.classList.add('open');
+    document.body.classList.add('modal-open');
+    document.getElementById('pmodal-close').focus();
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.classList.remove('modal-open');
+    if (lastFocus) lastFocus.focus();
+  }
+
+  cards.forEach(function (card) {
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    card.addEventListener('click', function () { openModal(card); });
+    card.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(card); }
+    });
+  });
+  document.getElementById('pmodal-close').addEventListener('click', closeModal);
+  modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+})();
+</script>
+</body>
+</html>
