@@ -125,21 +125,35 @@
   .train-side h3 { margin: 0 0 10px; font-size: 1.3rem; font-family: "Black Han Sans", sans-serif; }
   .train-side p { margin: 0 0 20px; font-size: 0.88rem; color: var(--ink-soft); }
 
-  /* ---------- 케이스 ---------- */
-  .cases { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 3px solid var(--line); }
-  @media (max-width: 900px) { .cases { grid-template-columns: 1fr; } }
-  .case { border-bottom: 1px solid var(--line-soft); display: flex; flex-direction: column; }
-  .cases .case:not(:last-child) { border-right: 1px solid var(--line-soft); }
-  @media (max-width: 900px) { .cases .case:not(:last-child) { border-right: none; } }
+  /* ---------- 프로젝트 아카이브 ---------- */
+  .filters { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+  .filter-btn {
+    font: inherit; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.04em;
+    padding: 10px 20px; cursor: pointer;
+    background: var(--bg); color: var(--ink); border: 2px solid var(--ink);
+    transition: background 0.12s, color 0.12s;
+  }
+  .filter-btn:hover, .filter-btn:focus-visible { background: #F1F0FF; outline: none; }
+  .filter-btn.on { background: var(--ink); color: var(--bg); }
+  .filter-btn .n { color: var(--accent); margin-left: 6px; }
+  .filter-btn.on .n { color: var(--dark-accent); }
+  .cases { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 3px solid var(--line); border-left: 1px solid var(--line-soft); }
+  @media (max-width: 900px) { .cases { grid-template-columns: 1fr; border-left: none; } }
+  .case { border-bottom: 1px solid var(--line-soft); border-right: 1px solid var(--line-soft); display: flex; flex-direction: column; }
+  @media (max-width: 900px) { .case { border-right: none; } }
+  .case.hidden { display: none; }
   .case .ph {
-    height: 160px; border-bottom: 1px solid var(--line-soft);
+    height: 130px; border-bottom: 1px solid var(--line-soft);
     background: repeating-linear-gradient(45deg, #F4F4F4, #F4F4F4 14px, #ECECEC 14px, #ECECEC 28px);
     display: flex; align-items: center; justify-content: center;
-    font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; color: var(--ink-soft); text-transform: uppercase;
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; color: var(--ink-soft); text-transform: uppercase;
   }
-  .case .bd { padding: 22px 24px 26px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-  .case h3 { margin: 0; font-size: 1.15rem; font-weight: 900; line-height: 1.4; }
-  .case dl { margin: 0; font-size: 0.83rem; color: var(--ink-soft); display: grid; grid-template-columns: 56px 1fr; gap: 4px 10px; }
+  .case .bd { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .case h3 { margin: 0; font-size: 1.1rem; font-weight: 900; line-height: 1.4; }
+  .case .org { font-size: 0.83rem; color: var(--ink-soft); font-weight: 500; }
+  .case details { margin-top: auto; font-size: 0.83rem; color: var(--ink-soft); border-top: 1px solid var(--line-soft); padding-top: 10px; }
+  .case details summary { cursor: pointer; font-weight: 700; color: var(--ink); font-size: 0.8rem; letter-spacing: 0.04em; }
+  .case dl { margin: 8px 0 0; font-size: 0.83rem; color: var(--ink-soft); display: grid; grid-template-columns: 56px 1fr; gap: 4px 10px; }
   .case dt { font-weight: 700; color: var(--ink); }
   .case dd { margin: 0; }
 
@@ -337,45 +351,149 @@
 <section id="works">
   <div class="wrap sec-inner">
     <div class="sec-head">
-      <h2 class="sec-title disp">대표 프로젝트</h2>
-      <span class="eyebrow">Selected Works</span>
-      <p class="sec-sub">발주처·과업이 있는 실제 일들입니다. 비슷한 사업을 검토 중이시라면 그대로 문의 주세요.</p>
+      <h2 class="sec-title disp">프로젝트</h2>
+      <span class="eyebrow">All Works</span>
+      <p class="sec-sub">발견이 해온 일 전부입니다. 분야를 누르면 그 일들만 모아 볼 수 있습니다 — 비슷한 사업을 검토 중이시라면 그대로 문의 주세요.</p>
     </div>
-    <div class="cases">
-      <div class="case">
-        <div class="ph">Photo — 왕송못순환랩</div>
+    <div class="filters" id="filters">
+      <button class="filter-btn on" data-f="all" type="button">전체</button>
+      <button class="filter-btn" data-f="train" type="button">사람 기르기</button>
+      <button class="filter-btn" data-f="archive" type="button">마을 기록</button>
+      <button class="filter-btn" data-f="edu" type="button">교육</button>
+      <button class="filter-btn" data-f="exhibit" type="button">전시·예술</button>
+      <button class="filter-btn" data-f="pub" type="button">발행·교구</button>
+    </div>
+    <div class="cases" id="cases">
+      <div class="case" data-cat="train">
+        <div class="ph">Photo</div>
         <div class="bd">
-          <span class="eyebrow">문화예술교육</span>
+          <span class="eyebrow">사람 기르기</span>
+          <h3>문화해설사 양성과정</h3>
+          <span class="org">의왕시평생학습관</span>
+          <details><summary>자세히</summary>
+            <dl><dt>과업</dt><dd>양성과정 커리큘럼 설계·운영, 네트워크 활성화 프로그램</dd></dl>
+          </details>
+        </div>
+      </div>
+      <div class="case" data-cat="train archive">
+        <div class="ph">Photo</div>
+        <div class="bd">
+          <span class="eyebrow">사람 기르기 · 마을 기록</span>
+          <h3>의왕마을생태연구회</h3>
+          <span class="org">시민 기록단 운영</span>
+          <details><summary>자세히</summary>
+            <dl><dt>과업</dt><dd>주민을 모아 동네를 직접 기록하는 모임을 꾸리고 운영. 주민이 활동의 주체로 남는 기록공동체.</dd></dl>
+          </details>
+        </div>
+      </div>
+      <div class="case" data-cat="archive pub">
+        <div class="ph">Photo</div>
+        <div class="bd">
+          <span class="eyebrow">마을 기록</span>
+          <h3>청계동 마을지</h3>
+          <span class="org">주민 참여 마을지·구술사 제작</span>
+          <details><summary>자세히</summary>
+            <dl><dt>과업</dt><dd>공동체의 역사와 기억을 주민과 함께 책·기록물로 제작</dd></dl>
+          </details>
+        </div>
+      </div>
+      <div class="case" data-cat="edu">
+        <div class="ph">Photo</div>
+        <div class="bd">
+          <span class="eyebrow">교육</span>
           <h3>꿈다락토요문화학교 〈왕송못순환랩〉</h3>
-          <dl>
-            <dt>발주</dt><dd>한국문화예술교육진흥원</dd>
-            <dt>과업</dt><dd>부들이야기·둠벙이야기 참여작가, 지지배배 기획·운영</dd>
-            <dt>협력</dt><dd>의왕시중앙도서관</dd>
-          </dl>
+          <span class="org">한국문화예술교육진흥원 · 의왕시중앙도서관</span>
+          <details><summary>자세히</summary>
+            <dl><dt>과업</dt><dd>부들이야기·둠벙이야기 참여작가, 지지배배 기획·운영. 교육과 전시 연계.</dd></dl>
+          </details>
         </div>
       </div>
-      <div class="case">
-        <div class="ph">Photo — 청계동 마을지</div>
+      <div class="case" data-cat="edu">
+        <div class="ph">Photo</div>
         <div class="bd">
-          <span class="eyebrow">시민 아카이빙</span>
-          <h3>청계동 마을지 · 주민 기록공동체</h3>
-          <dl>
-            <dt>유형</dt><dd>마을지·구술사 제작</dd>
-            <dt>과업</dt><dd>공동체의 역사와 기억을 주민과 함께 책·기록물로</dd>
-            <dt>운영</dt><dd>의왕마을생태연구회</dd>
-          </dl>
-        </div>
-      </div>
-      <div class="case">
-        <div class="ph">Photo — 이슬람실 교육</div>
-        <div class="bd">
-          <span class="eyebrow">박물관 교육</span>
+          <span class="eyebrow">교육 · 박물관</span>
           <h3>〈내가 본 이슬람, 유물이 말하는 이슬람〉</h3>
-          <dl>
-            <dt>대상</dt><dd>국립중앙박물관 이슬람실</dd>
-            <dt>과업</dt><dd>소장품 기반 참여형 교육 프로그램 개발</dd>
-            <dt>유형</dt><dd>교육 프로그램·교재 개발</dd>
-          </dl>
+          <span class="org">국립중앙박물관 이슬람실</span>
+          <details><summary>자세히</summary>
+            <dl><dt>과업</dt><dd>소장품 기반 참여형 교육 프로그램·교재 개발</dd></dl>
+          </details>
+        </div>
+      </div>
+      <div class="case" data-cat="edu">
+        <div class="ph">Photo</div>
+        <div class="bd">
+          <span class="eyebrow">교육 · 전통문화</span>
+          <h3>기산 김준근의 민속화로 알아보는 전통놀이</h3>
+          <span class="org">참여형 교육 프로그램</span>
+          <details><summary>자세히</summary>
+            <dl><dt>과업</dt><dd>민속화 소재 전통놀이 교육 프로그램 개발·운영</dd></dl>
+          </details>
+        </div>
+      </div>
+      <div class="case" data-cat="edu">
+        <div class="ph">Photo</div>
+        <div class="bd">
+          <span class="eyebrow">교육 · 생태</span>
+          <h3>가족숲체험·생태체험 프로그램</h3>
+          <span class="org">충북혁신도시 · 2025</span>
+          <details><summary>자세히</summary>
+            <dl><dt>과업</dt><dd>가족 대상 숲체험·생태체험 프로그램 강의. 음성 꽃동네(2023~2025), 음성-진천 평생학습공유플랫폼 협력.</dd></dl>
+          </details>
+        </div>
+      </div>
+      <div class="case" data-cat="exhibit">
+        <div class="ph">Photo</div>
+        <div class="bd">
+          <span class="eyebrow">전시·예술</span>
+          <h3>공공예술프로젝트 〈우리마을미술: 월암별곡〉</h3>
+          <span class="org">월암다이어리·월암랩소디 참여작가</span>
+          <details><summary>자세히</summary>
+            <dl><dt>과업</dt><dd>공공예술 프로젝트 참여작가로 작품 제작·운영</dd></dl>
+          </details>
+        </div>
+      </div>
+      <div class="case" data-cat="exhibit archive">
+        <div class="ph">Photo</div>
+        <div class="bd">
+          <span class="eyebrow">전시·예술 · 기록</span>
+          <h3>당신의 봄을 나누어 봄 아카이브</h3>
+          <span class="org">아카이브 전시</span>
+          <details><summary>자세히</summary>
+            <dl><dt>과업</dt><dd>시민 참여 아카이브 기획·전시</dd></dl>
+          </details>
+        </div>
+      </div>
+      <div class="case" data-cat="exhibit pub">
+        <div class="ph">Photo</div>
+        <div class="bd">
+          <span class="eyebrow">전시·예술 · 발행</span>
+          <h3>《왕송호수 담은 수첩》</h3>
+          <span class="org">터무니책방</span>
+          <details><summary>자세히</summary>
+            <dl><dt>과업</dt><dd>전시 및 아트북 제작</dd></dl>
+          </details>
+        </div>
+      </div>
+      <div class="case" data-cat="pub">
+        <div class="ph">Photo</div>
+        <div class="bd">
+          <span class="eyebrow">발행</span>
+          <h3>『우리동네 취미탐조 왕송호수』</h3>
+          <span class="org">독립출판</span>
+          <details><summary>자세히</summary>
+            <dl><dt>과업</dt><dd>지역 탐조 안내서 기획·제작</dd></dl>
+          </details>
+        </div>
+      </div>
+      <div class="case" data-cat="pub edu">
+        <div class="ph">Photo</div>
+        <div class="bd">
+          <span class="eyebrow">발행·교구</span>
+          <h3>지역 역사 보드게임 교구 개발</h3>
+          <span class="org">석수청소년문화의집 · 의왕문화원</span>
+          <details><summary>자세히</summary>
+            <dl><dt>과업</dt><dd>경기도 역사탐험대, 우리동네 탐험대 등 지역 역사·문화 보드게임 교구 개발</dd></dl>
+          </details>
         </div>
       </div>
     </div>
@@ -520,5 +638,43 @@
     </div>
   </div>
 </footer>
+
+<script>
+(function () {
+  var btns = document.querySelectorAll('.filter-btn');
+  var cards = document.querySelectorAll('#cases .case');
+
+  function apply(f) {
+    btns.forEach(function (b) { b.classList.toggle('on', b.dataset.f === f); });
+    cards.forEach(function (c) {
+      var cats = c.dataset.cat.split(' ');
+      c.classList.toggle('hidden', f !== 'all' && cats.indexOf(f) === -1);
+    });
+  }
+
+  btns.forEach(function (b) {
+    var n = 0;
+    cards.forEach(function (c) {
+      if (b.dataset.f === 'all' || c.dataset.cat.split(' ').indexOf(b.dataset.f) !== -1) n++;
+    });
+    var s = document.createElement('span');
+    s.className = 'n';
+    s.textContent = n;
+    b.appendChild(s);
+    b.addEventListener('click', function () {
+      apply(b.dataset.f);
+      if (history.replaceState) history.replaceState(null, '', '#works-' + b.dataset.f);
+    });
+  });
+
+  // #works-edu 처럼 해시로 바로 열면 해당 필터가 적용된 상태로 시작
+  var m = location.hash.match(/^#works-(\w+)$/);
+  if (m) {
+    apply(m[1]);
+    var sec = document.getElementById('works');
+    if (sec) sec.scrollIntoView();
+  }
+})();
+</script>
 
 </html>
