@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="400" height="400">
+  <!-- 커뮤니티아트랩 발견 심볼 "사람들의 원" — 빈 원(stroke)의 색만 상황에 따라 바꿔 쓰세요 -->
+  <g fill="#1A1A1A">
+    <circle cx="50" cy="14" r="8"/>
+    <circle cx="75.5" cy="24.5" r="8"/>
+    <circle cx="86" cy="50" r="8"/>
+    <circle cx="75.5" cy="75.5" r="8"/>
+    <circle cx="50" cy="86" r="8"/>
+    <circle cx="24.5" cy="75.5" r="8"/>
+    <circle cx="14" cy="50" r="8"/>
+  </g>
+  <circle cx="24.5" cy="24.5" r="8" fill="none" stroke="#1A1A1A" stroke-width="3.6"/>
+</svg>
