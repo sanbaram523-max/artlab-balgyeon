@@ -76,8 +76,8 @@
   .place li .dot { width:7px; height:7px; border-radius:50%; flex:none; transform:translateY(-1px); }
 
   #map { min-height:0; height:100%; background:#EEE; z-index:1; }
-  /* 지도 바탕을 흑백으로 — 브랜드 톤에 맞추고 컬러 핀이 또렷해집니다 */
-  .leaflet-tile-pane { filter: grayscale(1) contrast(0.88) brightness(1.06); }
+  /* 컬러 지도 위에서 핀이 묻히지 않도록 그림자 */
+  .leaflet-overlay-pane svg { filter: drop-shadow(0 2px 5px rgba(0,0,0,.4)); }
   @media (max-width:900px) { #map { height:52vh; order:1; } }
 
   /* 지도 팝업 */
@@ -221,7 +221,7 @@ function popupHTML(p) {
 PLACES.forEach(function (p) {
   var mainCat = p.works[0].c;
   var m = L.circleMarker([p.lat, p.lng], {
-    radius: 9, weight: 3,
+    radius: 10, weight: 3.5,
     color: '#FFFFFF', fillColor: CATS[mainCat].color, fillOpacity: 1
   }).addTo(map).bindPopup(popupHTML(p), { maxWidth: 300 });
   m.on('click', function () { select(p.id, false); });
