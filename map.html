@@ -228,7 +228,16 @@ PLACES.forEach(function (p) {
   markers[p.id] = m;
 });
 
-map.fitBounds(PLACES.map(function (p) { return [p.lat, p.lng]; }), { padding: [50, 50] });
+// 지도 컨테이너 크기가 잡힌 뒤에 범위를 맞춰야 줌이 튀지 않는다
+var ALL_BOUNDS = L.latLngBounds(PLACES.map(function (p) { return [p.lat, p.lng]; }));
+function fitAll() {
+  map.invalidateSize();
+  map.fitBounds(ALL_BOUNDS, { padding: [50, 50] });
+}
+fitAll();
+setTimeout(fitAll, 300);
+window.addEventListener('load', fitAll);
+window.addEventListener('resize', function () { map.invalidateSize(); });
 
 // ── 리스트 ───────────────────────────────────────────
 var listEl = document.getElementById('list');
@@ -297,7 +306,6 @@ function applyFilter(key) {
 }
 
 document.getElementById('cnt').textContent = PLACES.length;
-setTimeout(function () { map.invalidateSize(); }, 200);
 </script>
 </body>
 </html>
