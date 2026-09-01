@@ -76,6 +76,8 @@
   .place li .dot { width:7px; height:7px; border-radius:50%; flex:none; transform:translateY(-1px); }
 
   #map { min-height:0; height:100%; background:#EEE; z-index:1; }
+  /* 지도 바탕을 흑백으로 — 브랜드 톤에 맞추고 컬러 핀이 또렷해집니다 */
+  .leaflet-tile-pane { filter: grayscale(1) contrast(0.88) brightness(1.06); }
   @media (max-width:900px) { #map { height:52vh; order:1; } }
 
   /* 지도 팝업 */
@@ -203,8 +205,8 @@ var PLACES = [
 
 // ── 지도 ─────────────────────────────────────────────
 var map = L.map('map', { scrollWheelZoom:true, zoomControl:true });
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-  attribution:'&copy; OpenStreetMap &copy; CARTO', subdomains:'abcd', maxZoom:19
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution:'&copy; OpenStreetMap contributors', maxZoom:19
 }).addTo(map);
 
 var markers = {}, current = null;
