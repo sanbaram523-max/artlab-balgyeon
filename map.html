@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>발견의 지도 — 커뮤니티아트랩 발견</title>
+<meta name="description" content="커뮤니티아트랩 발견이 활동한 장소들의 지도. 왕송호수, 청계동, 월암동, 의왕·안양 곳곳의 문화예술 활동 기록.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root {
+    --bg:#FFFFFF; --ink:#0A0A0A; --ink-soft:#555555;
+    --line:#0A0A0A; --line-soft:#DADADA; --accent:#002FA7; --accent-ink:#FFFFFF;
+    --tint:#EFF2FA;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    line-height:1.7; font-size:16px; word-break:keep-all;
+    display:flex; flex-direction:column;
+  }
+  .disp { font-family:"Black Han Sans","Noto Sans KR",sans-serif; font-weight:400; line-height:1.1; }
+  .wrap { max-width:1400px; margin:0 auto; width:100%; padding:0 24px; }
+  a { color:inherit; }
+  .eyebrow { font-size:0.7rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent); }
+
+  /* 상단 */
+  .topbar { border-bottom:3px solid var(--line); background:var(--bg); flex:none; }
+  .topbar-inner { display:flex; justify-content:space-between; align-items:center; padding:12px 0; gap:16px; flex-wrap:wrap; }
+  .wordmark { font-size:1.1rem; text-decoration:none; display:flex; align-items:center; gap:9px; }
+  .back { text-decoration:none; font-size:0.8rem; font-weight:700; letter-spacing:0.08em; }
+  .back:hover { color:var(--accent); }
+
+  .head { border-bottom:3px solid var(--line); flex:none; }
+  .head-inner { padding:22px 0 20px; display:flex; justify-content:space-between; align-items:flex-end; gap:20px; flex-wrap:wrap; }
+  .head h1 { margin:0 0 6px; font-size:clamp(1.7rem,4.4vw,2.6rem); }
+  .head p { margin:0; color:var(--ink-soft); font-size:0.9rem; max-width:46em; }
+  .head .count { font-size:0.8rem; font-weight:700; letter-spacing:0.08em; color:var(--ink-soft); white-space:nowrap; }
+  .head .count b { color:var(--accent); font-size:1.4rem; }
+
+  /* 필터 */
+  .filters { border-bottom:3px solid var(--line); flex:none; background:var(--bg); }
+  .filters-inner { display:flex; gap:8px; padding:12px 0; flex-wrap:wrap; }
+  .fbtn {
+    font:inherit; font-size:0.82rem; font-weight:700; letter-spacing:0.02em;
+    padding:8px 16px; cursor:pointer; background:var(--bg); color:var(--ink);
+    border:2px solid var(--ink); transition:background .12s,color .12s;
+    display:inline-flex; align-items:center; gap:7px;
+  }
+  .fbtn:hover, .fbtn:focus-visible { background:var(--tint); outline:none; }
+  .fbtn.on { background:var(--ink); color:var(--bg); }
+  .fbtn .sw { width:10px; height:10px; border-radius:50%; background:currentColor; flex:none; }
+  .fbtn .n { color:var(--accent); }
+  .fbtn.on .n { color:#9DA8FF; }
+
+  /* 본문 = 리스트 + 지도 */
+  .split { flex:1; display:grid; grid-template-columns: 400px 1fr; min-height:0; }
+  @media (max-width:900px) { .split { grid-template-columns:1fr; grid-template-rows:auto 1fr; } }
+
+  .list { border-right:1px solid var(--line-soft); overflow-y:auto; min-height:0; }
+  @media (max-width:900px) { .list { border-right:none; border-top:1px solid var(--line-soft); order:2; max-height:none; } }
+  .place {
+    padding:18px 22px; border-bottom:1px solid var(--line-soft); cursor:pointer;
+    transition:background .12s; display:flex; flex-direction:column; gap:6px;
+  }
+  .place:hover, .place:focus-visible { background:var(--tint); outline:none; }
+  .place.active { background:var(--tint); box-shadow: inset 5px 0 0 var(--accent); }
+  .place.hidden { display:none; }
+  .place .nm { font-size:1.02rem; font-weight:900; line-height:1.35; }
+  .place .ar { font-size:0.78rem; color:var(--ink-soft); letter-spacing:0.02em; }
+  .place ul { margin:4px 0 0; padding:0; list-style:none; display:grid; gap:4px; }
+  .place li { font-size:0.83rem; color:var(--ink-soft); display:flex; gap:7px; align-items:baseline; }
+  .place li .dot { width:7px; height:7px; border-radius:50%; flex:none; transform:translateY(-1px); }
+
+  #map { min-height:0; height:100%; background:#EEE; z-index:1; }
+  @media (max-width:900px) { #map { height:52vh; order:1; } }
+
+  /* 지도 팝업 */
+  .leaflet-popup-content-wrapper { border-radius:0; border:2px solid var(--ink); box-shadow:0 6px 18px rgba(0,0,0,.18); }
+  .leaflet-popup-content { margin:14px 16px; font-family:"Noto Sans KR",sans-serif; line-height:1.6; }
+  .leaflet-popup-tip { border:2px solid var(--ink); }
+  .pop h3 { margin:0 0 2px; font-size:1rem; font-weight:900; }
+  .pop .ar { font-size:0.75rem; color:var(--ink-soft); margin-bottom:8px; }
+  .pop ul { margin:0; padding:0; list-style:none; display:grid; gap:5px; }
+  .pop li { font-size:0.82rem; color:var(--ink-soft); }
+  .pop li b { color:var(--ink); font-weight:700; display:block; }
+
+  footer { border-top:3px solid var(--line); padding:14px 0; flex:none; font-size:0.72rem; color:var(--ink-soft); }
+  .foot { display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap; letter-spacing:0.06em; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="wordmark disp" href="/">
+      <svg width="22" height="22" viewBox="0 0 100 100" aria-hidden="true">
+        <g fill="currentColor"><circle cx="50" cy="14" r="9"/><circle cx="75.5" cy="24.5" r="9"/><circle cx="86" cy="50" r="9"/><circle cx="75.5" cy="75.5" r="9"/><circle cx="50" cy="86" r="9"/><circle cx="24.5" cy="75.5" r="9"/><circle cx="14" cy="50" r="9"/></g>
+        <circle cx="24.5" cy="24.5" r="9" fill="none" stroke="currentColor" stroke-width="4.5"/>
+      </svg>
+      <span><span style="font-family:'Noto Sans KR',sans-serif;font-weight:700;font-size:0.8rem;">커뮤니티아트랩</span> 발견</span>
+    </a>
+    <a class="back" href="/">← 홈으로</a>
+  </div>
+</header>
+
+<div class="head">
+  <div class="wrap head-inner">
+    <div>
+      <h1 class="disp">발견의 지도</h1>
+      <p>발견이 걸어온 자리들입니다. 왕송호수에서 청계동까지, 우리 동네 어디에서 무슨 일을 했는지 지도 위에서 볼 수 있습니다.</p>
+    </div>
+    <div class="count"><b id="cnt">0</b> 곳</div>
+  </div>
+</div>
+
+<div class="filters">
+  <div class="wrap filters-inner" id="filters"></div>
+</div>
+
+<div class="split">
+  <div class="list" id="list"></div>
+  <div id="map"></div>
+</div>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 커뮤니티아트랩 발견 · 핀 위치는 대략적인 표시입니다</span>
+    <span><a href="/" style="text-decoration:none;">ARTLABBALGYEON.KR</a></span>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// ── 분야 ─────────────────────────────────────────────
+var CATS = {
+  base:    { label:'거점',        color:'#0A0A0A' },
+  train:   { label:'사람 기르기',  color:'#002FA7' },
+  archive: { label:'마을 기록',    color:'#1F7A5A' },
+  edu:     { label:'교육',        color:'#C2410C' },
+  exhibit: { label:'전시·예술',    color:'#7C2D8F' },
+  pub:     { label:'발행·교구',    color:'#B08900' }
+};
+
+// ── 장소 데이터 (여기만 고치면 지도가 바뀝니다) ──────────
+var PLACES = [
+  { id:'office', nm:'커뮤니티아트랩 발견', ar:'안양시 동안구 시민대로 230', lat:37.39233, lng:126.95651,
+    works:[{c:'base', t:'연구소 사무실', d:'기획·연구·교구 개발의 거점'}] },
+
+  { id:'wangsong', nm:'왕송호수 · 왕송못', ar:'의왕시 부곡동', lat:37.31791, lng:126.94584,
+    works:[
+      {c:'edu',     t:'꿈다락토요문화학교 〈왕송못순환랩〉', d:'한국문화예술교육진흥원 — 부들이야기·둠벙이야기 참여작가, 지지배배 기획·운영'},
+      {c:'pub',     t:'『우리동네 취미탐조 왕송호수』', d:'독립출판 — 지역 탐조 안내서'},
+      {c:'exhibit', t:'《왕송호수 담은 수첩》', d:'터무니책방 — 전시 및 아트북 제작'}
+    ] },
+
+  { id:'pyeongsaeng', nm:'의왕시평생학습관', ar:'의왕시 오전동', lat:37.35436, lng:126.97591,
+    works:[
+      {c:'train', t:'문화해설사 양성과정', d:'커리큘럼 설계·운영'},
+      {c:'train', t:'네트워크 활성화 프로그램', d:'지역 문화활동가 네트워크'}
+    ] },
+
+  { id:'library', nm:'의왕시중앙도서관', ar:'의왕시 고천동', lat:37.34226, lng:126.96948,
+    works:[{c:'edu', t:'꿈다락 문화예술교육 · 전시', d:'왕송못 순환랩 연계 교육과 전시'}] },
+
+  { id:'munhwawon', nm:'의왕문화원', ar:'의왕시 오전동', lat:37.35208, lng:126.98189,
+    works:[{c:'pub', t:'지역 역사 보드게임 교구 개발', d:'놀이로 배우는 지역사 교구'}] },
+
+  { id:'cheonggye', nm:'청계동', ar:'의왕시 청계동', lat:37.38436, lng:127.01173,
+    works:[{c:'archive', t:'청계동 마을지', d:'주민 참여 마을지·구술사 제작 — 공동체의 역사와 기억을 책으로'}] },
+
+  { id:'wolam', nm:'월암동', ar:'의왕시 월암동', lat:37.31036, lng:126.95474,
+    works:[{c:'exhibit', t:'공공예술프로젝트 〈우리마을미술: 월암별곡〉', d:'월암다이어리·월암랩소디 참여작가'}] },
+
+  { id:'seoksu', nm:'석수청소년문화의집', ar:'안양시 만안구 석수동', lat:37.42014, lng:126.90613,
+    works:[{c:'pub', t:'지역 역사 보드게임 교구 개발', d:'청소년 대상 지역사 교구'}] },
+
+  { id:'museum', nm:'국립중앙박물관', ar:'서울 용산구 서빙고로 137', lat:37.52395, lng:126.98032,
+    works:[{c:'edu', t:'〈내가 본 이슬람, 유물이 말하는 이슬람〉', d:'이슬람실 소장품 기반 참여형 교육 프로그램 개발'}] },
+
+  { id:'chungbuk', nm:'충북혁신도시 · 음성', ar:'충북 음성군 · 진천군', lat:36.90568, lng:127.54730,
+    works:[{c:'edu', t:'가족숲체험 · 생태체험 프로그램', d:'2025 강의 — 음성 꽃동네(2023~2025), 음성-진천 평생학습공유플랫폼'}] }
+];
+
+// ── 지도 ─────────────────────────────────────────────
+var map = L.map('map', { scrollWheelZoom:true, zoomControl:true });
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  attribution:'&copy; OpenStreetMap &copy; CARTO', subdomains:'abcd', maxZoom:19
+}).addTo(map);
+
+var markers = {}, current = null;
+
+function popupHTML(p) {
+  var li = p.works.map(function(w){
+    return '<li><b>' + w.t + '</b>' + (w.d ? w.d : '') + '</li>';
+  }).join('');
+  return '<div class="pop"><h3>' + p.nm + '</h3><div class="ar">' + p.ar + '</div><ul>' + li + '</ul></div>';
+}
+
+PLACES.forEach(function (p) {
+  var mainCat = p.works[0].c;
+  var m = L.circleMarker([p.lat, p.lng], {
+    radius: 9, weight: 3,
+    color: '#FFFFFF', fillColor: CATS[mainCat].color, fillOpacity: 1
+  }).addTo(map).bindPopup(popupHTML(p), { maxWidth: 300 });
+  m.on('click', function () { select(p.id, false); });
+  markers[p.id] = m;
+});
+
+map.fitBounds(PLACES.map(function (p) { return [p.lat, p.lng]; }), { padding: [50, 50] });
+
+// ── 리스트 ───────────────────────────────────────────
+var listEl = document.getElementById('list');
+PLACES.forEach(function (p) {
+  var el = document.createElement('div');
+  el.className = 'place';
+  el.dataset.id = p.id;
+  el.dataset.cats = p.works.map(function (w) { return w.c; }).join(' ');
+  el.setAttribute('tabindex', '0');
+  el.setAttribute('role', 'button');
+  el.innerHTML =
+    '<span class="nm">' + p.nm + '</span>' +
+    '<span class="ar">' + p.ar + '</span>' +
+    '<ul>' + p.works.map(function (w) {
+      return '<li><span class="dot" style="background:' + CATS[w.c].color + '"></span><span>' + w.t + '</span></li>';
+    }).join('') + '</ul>';
+  el.addEventListener('click', function () { select(p.id, true); });
+  el.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(p.id, true); }
+  });
+  listEl.appendChild(el);
+});
+
+function select(id, fly) {
+  current = id;
+  document.querySelectorAll('.place').forEach(function (el) {
+    el.classList.toggle('active', el.dataset.id === id);
+  });
+  var p = PLACES.filter(function (x) { return x.id === id; })[0];
+  if (fly) map.flyTo([p.lat, p.lng], Math.max(map.getZoom(), 13), { duration: 0.6 });
+  markers[id].openPopup();
+  var el = document.querySelector('.place[data-id="' + id + '"]');
+  if (el && !fly) el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+}
+
+// ── 필터 ─────────────────────────────────────────────
+var filtersEl = document.getElementById('filters');
+var order = ['all', 'base', 'train', 'archive', 'edu', 'exhibit', 'pub'];
+
+order.forEach(function (key) {
+  var b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'fbtn' + (key === 'all' ? ' on' : '');
+  b.dataset.f = key;
+  var n = key === 'all' ? PLACES.length : PLACES.filter(function (p) {
+    return p.works.some(function (w) { return w.c === key; });
+  }).length;
+  b.innerHTML = (key === 'all' ? '' : '<span class="sw" style="background:' + CATS[key].color + '"></span>') +
+    (key === 'all' ? '전체' : CATS[key].label) + '<span class="n">' + n + '</span>';
+  b.addEventListener('click', function () { applyFilter(key); });
+  filtersEl.appendChild(b);
+});
+
+function applyFilter(key) {
+  document.querySelectorAll('.fbtn').forEach(function (b) { b.classList.toggle('on', b.dataset.f === key); });
+  var shown = [];
+  PLACES.forEach(function (p) {
+    var hit = key === 'all' || p.works.some(function (w) { return w.c === key; });
+    var el = document.querySelector('.place[data-id="' + p.id + '"]');
+    el.classList.toggle('hidden', !hit);
+    if (hit) { markers[p.id].addTo(map); shown.push([p.lat, p.lng]); }
+    else { map.removeLayer(markers[p.id]); }
+  });
+  document.getElementById('cnt').textContent = shown.length;
+  if (shown.length) map.flyToBounds(shown, { padding: [50, 50], duration: 0.6 });
+}
+
+document.getElementById('cnt').textContent = PLACES.length;
+setTimeout(function () { map.invalidateSize(); }, 200);
+</script>
+</body>
+</html>
