@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="우리 동네의 숨은 가치를 예술로 연결하는 문화예술연구소, 커뮤니티아트랩 발견. 경기도 역사탐험 키트 등 지역 역사 보드게임 교구 제작, 문화해설사 양성, 마을기록.">
+<meta name="description" content="지역의 자원과 사람을 찾아내고, 시민이 주체로 성장하는 참여구조를 설계합니다. 시민참여·시민주도형 프로젝트의 지역 조사, 참여 설계, 양성과정, 기록·아카이브를 함께하는 지역문화 연구소, 커뮤니티아트랩 발견.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta property="og:type" content="website">
-<meta property="og:title" content="커뮤니티아트랩 발견">
-<meta property="og:description" content="우리 동네의 숨은 가치를 예술로 연결하는 문화예술연구소">
+<meta property="og:title" content="커뮤니티아트랩 발견 | 시민참여 프로젝트 설계 연구소">
+<meta property="og:description" content="지역을 읽고 사람의 참여를 설계합니다. 시민이 참여자에서 주체로 성장하는 프로젝트를 설계부터 함께합니다.">
 <meta property="og:url" content="https://artlabbalgyeon.kr/">
 <meta property="og:image" content="https://artlabbalgyeon.kr/og.png">
 <meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary_large_image">
-<title>커뮤니티아트랩 발견</title>
+<title>커뮤니티아트랩 발견 | 시민참여 프로젝트 설계 연구소</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
 <style>
   :root {
@@ -292,6 +292,52 @@
   .foot-grid .admin { line-height: 2; text-align: right; }
   @media (max-width: 700px) { .foot-grid .admin { text-align: left; } }
   .foot-grid a { color: var(--ink-soft); }
+
+  /* ---------- 개편: 첫 화면 증거 띠 ---------- */
+  .hero h1.hero-h1 { font-size: clamp(2.4rem, 7vw, 5.6rem); text-transform: none; }
+  .proof { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 3px solid var(--line); margin-top: 36px; }
+  @media (max-width: 760px) { .proof { grid-template-columns: 1fr; } }
+  .proof a { text-decoration: none; padding: 16px 18px; border-bottom: 1px solid var(--line-soft); display: flex; flex-direction: column; gap: 2px; transition: background 0.12s; }
+  .proof a:not(:last-child) { border-right: 1px solid var(--line-soft); }
+  @media (max-width: 760px) { .proof a:not(:last-child) { border-right: none; } }
+  .proof a:hover, .proof a:focus-visible { background: #F1F0FF; outline: none; }
+  .proof b { font-weight: 900; font-size: 1rem; }
+  .proof span { font-size: 0.82rem; color: var(--ink-soft); }
+
+  /* ---------- 개편: 발견은 ---------- */
+  .about-copy { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin: 28px 0 24px; max-width: 60em; }
+  @media (max-width: 760px) { .about-copy { grid-template-columns: 1fr; } }
+  .about-copy p { margin: 0; color: #DDDDDD; font-size: 0.98rem; }
+  .about-quote { margin: 0 0 18px; color: var(--dark-muted); font-size: 0.92rem; }
+  .about-quote span { display: block; font-size: 0.72rem; letter-spacing: 0.12em; margin-top: 4px; }
+
+  /* ---------- 개편: 해결하는 문제 ---------- */
+  .probs { display: grid; grid-template-columns: 1fr 1fr; border-top: 3px solid var(--line); }
+  @media (max-width: 760px) { .probs { grid-template-columns: 1fr; } }
+  .prob { padding: 26px 24px 30px; border-bottom: 1px solid var(--line-soft); }
+  .probs .prob:nth-child(odd) { border-right: 1px solid var(--line-soft); }
+  @media (max-width: 760px) { .probs .prob:nth-child(odd) { border-right: none; } }
+  .prob h3 { margin: 0 0 8px; font-family: "Black Han Sans", sans-serif; font-weight: 400; font-size: clamp(1.25rem, 2.4vw, 1.6rem); line-height: 1.35; }
+  .prob p { margin: 0; color: var(--ink-soft); font-size: 0.92rem; }
+
+  /* ---------- 개편: 방법 5단계 ---------- */
+  ol.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); border-top: 3px solid var(--line); }
+  @media (max-width: 960px) { ol.steps { grid-template-columns: 1fr; } }
+  .step { padding: 22px 18px 26px; border-bottom: 1px solid var(--line-soft); display: flex; flex-direction: column; gap: 8px; }
+  ol.steps .step:not(:last-child) { border-right: 1px solid var(--line-soft); }
+  @media (max-width: 960px) { ol.steps .step:not(:last-child) { border-right: none; } }
+  .step .no { font-family: "Black Han Sans", sans-serif; color: var(--accent); font-size: 1.1rem; }
+  .step h3 { margin: 0; font-size: 1.15rem; font-weight: 900; }
+  .step p { margin: 0; font-size: 0.88rem; color: var(--ink-soft); flex: 1; }
+  .step .tool { font-size: 0.78rem; font-weight: 700; color: var(--ink); border-top: 1px solid var(--line-soft); padding-top: 8px; }
+  .step .tool a { color: var(--accent); }
+
+  /* ---------- 개편: 연구 ---------- */
+  .paper { border: 3px solid var(--line); padding: 28px 28px 30px; }
+  .paper h3 { margin: 8px 0 6px; font-family: "Black Han Sans", sans-serif; font-weight: 400; font-size: clamp(1.4rem, 3.2vw, 2.2rem); line-height: 1.3; }
+  .paper p { margin: 0 0 14px; color: var(--ink-soft); }
+  .paper .award { display: inline-block; font-size: 0.82rem; font-weight: 700; border-bottom: 3px solid var(--accent); }
+  .cform select { font: inherit; font-size: 0.9rem; padding: 12px; border: 1px solid var(--line-soft); background: var(--bg); color: var(--ink); width: 100%; }
 </style>
 
 <header class="topbar">
@@ -306,113 +352,115 @@
       <span style="display:inline-flex; align-items:baseline; gap:7px;"><span style="font-family:'Noto Sans KR',sans-serif; font-weight:700; font-size:0.85rem;">커뮤니티아트랩</span><span>발견</span></span>
     </a>
     <nav class="gnb">
-      <a href="#paths">하는 일</a>
-      <a href="#train">양성</a>
+      <a href="#about">발견은</a>
+      <a href="#problems">해결하는 문제</a>
+      <a href="#method">방법</a>
       <a href="#works">프로젝트</a>
-      <a href="map.html">지도</a>
-      <a href="#kits">교구</a>
-      <a href="#news">소식</a>
-      <a href="#contact">문의</a>
+      <a href="#insights">연구·인사이트</a>
+      <a href="#contact">의뢰하기</a>
     </nav>
   </div>
 </header>
 
-<div class="ticker">
-  <a class="ticker-static" href="#news">정기 프로그램 참가자 모집 중 · COMMUNITY ARTLAB BALGYEON <span class="go">모집 안내 보기 →</span></a>
-</div>
-
 <div class="hero" id="top">
   <div class="wrap hero-inner">
-    <h1 class="disp">동네에서<br>예술이 <span class="accent">산다</span></h1>
+    <h1 class="disp hero-h1">시민이 <span class="accent">주체</span>가 되는 프로젝트,<br>설계부터 함께합니다</h1>
     <div class="hero-sub">
-      <p>커뮤니티아트랩 발견은 지역사회에 숨어 있는 가치를 찾아, 누구나 예술의 주체가 될 수 있도록 연결하는 문화예술연구소입니다. 지역에서 문화를 이끌 사람을 기르고, 기관과 함께 기록·전시·교육을 만듭니다.</p>
-      <span class="en">Where Neighborhood Art Lives Now</span>
+      <p>커뮤니티아트랩 발견은 지역의 자원과 사람을 찾아내고, 시민이 참여자에서 주체로 성장하도록 참여구조를 설계합니다.</p>
+      <span class="en">Community Artlab Balgyeon</span>
     </div>
-    <div style="margin-top:36px; display:flex; gap:14px; flex-wrap:wrap;">
-      <a class="btn fill" href="#contact">기관·단체 협업 문의</a>
-      <a class="btn" href="#kits">교구·프로그램 보러가기</a>
+    <div class="proof">
+      <a href="#work-cheonggye"><b>청계동 마을지</b><span>주민 참여 마을지·구술사</span></a>
+      <a href="#work-docent"><b>문화해설사 양성과정</b><span>의왕시평생학습관</span></a>
+      <a href="#insight-paper"><b>시민참여 아카이브 연구</b><span>2026 학술우수 논문상</span></a>
+    </div>
+    <div style="margin-top:32px; display:flex; gap:14px; flex-wrap:wrap;">
+      <a class="btn fill" href="#contact">의뢰하기</a>
+      <a class="btn" href="#method">발견의 방법 보기</a>
     </div>
   </div>
 </div>
 
-<div class="statement">
+<section id="about" class="statement">
   <div class="wrap statement-inner">
-    <p class="big">“모든 예술은 <mark>‘자세히 들여다보는 것’</mark>에서 시작됩니다. 평범해 보이는 풍경 속에 수많은 이야기가 숨어 있습니다.”</p>
-    <span class="src">— 커뮤니티아트랩 발견을 시작하며</span>
+    <span class="eyebrow" style="color:var(--dark-accent);">About · 발견은 무엇인가</span>
+    <p class="big" style="margin-top:14px;">발견은 지역의 자원과 사람을 찾아내고, 시민이 <mark>참여자에서 주체로</mark> 성장할 수 있도록 참여구조를 설계합니다.</p>
+    <div class="about-copy">
+      <p>시민참여 사업에서 가장 어려운 일은 사람을 모으는 것이 아니라, 모인 사람이 주인이 되게 하는 것입니다. 그래서 발견은 프로그램을 먼저 내밀지 않고, 누가 참여하고 어디까지 결정하며 기록이 어디에 남을지부터 진단합니다.</p>
+      <p>시민기록, 생태조사, 마을아카이브, 주민전시, 지역축제, 주민교육. 내용은 달라도 사람이 주체가 되는 구조를 설계한다는 원칙은 같습니다.</p>
+    </div>
+    <p class="about-quote">“모든 예술은 ‘자세히 들여다보는 것’에서 시작됩니다.” <span>동네에서 예술이 산다 · Where Neighborhood Art Lives Now</span></p>
+    <span class="src">대표 김은지 · 시민참여 구조 연구자, 지역문화 기획자</span>
   </div>
-</div>
+</section>
 
-<section id="paths">
+<section id="problems">
   <div class="wrap sec-inner">
     <div class="sec-head">
-      <h2 class="sec-title disp">세 갈래의 발견</h2>
-      <span class="eyebrow">What We Do</span>
-      <p class="sec-sub">사람을 기르고, 기관과 함께 만들고, 놀이로 배웁니다. 세 가지 일은 서로를 키웁니다 — 교구로 만난 교사가 수업을 의뢰하고, 수업을 경험한 기관이 강사 양성을 맡깁니다.</p>
+      <h2 class="sec-title disp">이런 고민이 있는<br>기관·단체와 일합니다</h2>
+      <span class="eyebrow">Problems We Solve</span>
     </div>
-    <div class="paths">
-      <a class="path" href="#train">
-        <span class="eyebrow">Training · 기관·문화조직</span>
-        <span class="verb">기른다<em>.</em></span>
-        <p>지역에서 문화 활동을 이끌 해설가·활동가·강사·코디네이터를 교육하고 길러냅니다. 양성과정의 설계부터 운영까지.</p>
-        <span class="go">양성과정 보기 →</span>
-      </a>
-      <a class="path" href="#works">
-        <span class="eyebrow">Projects · 지자체·재단·박물관</span>
-        <span class="verb">함께 만든다<em>.</em></span>
-        <p>시민 아카이빙, 마을지·구술 기록, 박물관 교육콘텐츠, 전시 기획까지 — 지역의 이야기를 기관과 함께 만듭니다.</p>
-        <span class="go">프로젝트 보기 →</span>
-      </a>
-      <a class="path" href="#kits">
-        <span class="eyebrow">Kits · 학교·도서관·가족</span>
-        <span class="verb">갖고 논다<em>.</em></span>
-        <p>지역의 역사와 이야기를 놀이로 배우는 보드게임 교구. 구매해서 바로 쓰거나, 강사와 함께하는 수업으로.</p>
-        <span class="go">교구 보기 →</span>
-      </a>
+    <div class="probs">
+      <div class="prob">
+        <h3>“주민이 모이긴 하는데, 주도하지 않아요.”</h3>
+        <p>참여 권한을 단계별로 나누는 구조를 설계합니다.</p>
+      </div>
+      <div class="prob">
+        <h3>“공모사업에 ‘시민참여’를 써야 하는데 막막해요.”</h3>
+        <p>지역 조사부터 운영 계획까지 사업 구조를 함께 짭니다.</p>
+      </div>
+      <div class="prob">
+        <h3>“사업이 끝나면 남는 게 없어요.”</h3>
+        <p>기록·아카이브로 결과를 지역의 자산으로 남깁니다.</p>
+      </div>
+      <div class="prob">
+        <h3>“우리 지역의 주민 활동가를 키우고 싶어요.”</h3>
+        <p>시민이 직접 해설하고 기록하는 양성과정을 설계·운영합니다.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="train">
+<section id="method">
+  <span id="paths" aria-hidden="true"></span><span id="train" aria-hidden="true"></span>
   <div class="wrap sec-inner">
     <div class="sec-head">
-      <h2 class="sec-title disp">사람을 기릅니다</h2>
-      <span class="eyebrow">Training</span>
-      <p class="sec-sub">프로그램은 끝나도 사람은 남습니다. 발견은 일회성 행사 대신, 지역에 남아 활동을 이어갈 사람을 기르는 일을 가장 중요하게 여깁니다.</p>
+      <h2 class="sec-title disp">발견의 방법</h2>
+      <span class="eyebrow">Method</span>
+      <p class="sec-sub">지역을 읽는 데서 시작해, 다시 지역으로 돌려줍니다.</p>
     </div>
-    <div class="train-grid">
-      <div class="train-copy">
-        <p><b>문화해설사 · 마을활동가 · 교육 강사 · 프로그램 코디네이터.</b> 지역 문화의 현장에는 저마다 다른 역할이 필요합니다. 발견은 기관의 목적에 맞춰 커리큘럼을 설계하고, 교육을 운영하고, 수료 후의 활동까지 잇습니다.</p>
-        <div class="train-list">
-          <div class="train-item">
-            <span class="no">01</span>
-            <div>
-              <h3>양성과정 커리큘럼 설계·운영</h3>
-              <p>기관 의뢰형 — 지역과 목적에 맞춘 과정을 처음부터 설계해 운영까지 맡습니다. (의왕시평생학습관 문화해설사 양성과정)</p>
-            </div>
-          </div>
-          <div class="train-item">
-            <span class="no">02</span>
-            <div>
-              <h3>강사 교육 워크숍</h3>
-              <p>이미 활동 중인 강사·활동가의 역량을 높이는 단기 워크숍과 보수교육을 진행합니다.</p>
-            </div>
-          </div>
-          <div class="train-item">
-            <span class="no">03</span>
-            <div>
-              <h3>시민 기록단·문화공동체 운영</h3>
-              <p>주민이 활동의 주체로 남는 기록공동체를 꾸리고 이끕니다. (의왕마을생태연구회, 청계동 마을지)</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <aside class="train-side">
-        <span class="eyebrow">For Organizations</span>
-        <h3>우리 조직의 강사를<br>양성하고 싶다면</h3>
-        <p>지자체, 문화재단, 문화원, 교육기관, 마을공동체 — 규모와 상관없이 필요한 만큼 설계해 드립니다. 소규모 과정도 환영합니다.</p>
-        <a class="btn fill sm" href="#contact">양성과정 상담하기</a>
-      </aside>
-    </div>
+    <ol class="steps">
+      <li class="step">
+        <span class="no">01</span>
+        <h3>지역 리서치</h3>
+        <p>장소, 사람, 이야기, 생태를 조사합니다.</p>
+        <span class="tool">마을지도 키트 · 현장 조사 · <a href="map.html">발견의 지도</a></span>
+      </li>
+      <li class="step">
+        <span class="no">02</span>
+        <h3>참여 설계</h3>
+        <p>누가 어디까지 결정하고 만들지 참여 구조를 짭니다.</p>
+        <span class="tool">참여 권한 설계</span>
+      </li>
+      <li class="step">
+        <span class="no">03</span>
+        <h3>실행</h3>
+        <p>워크숍과 양성과정으로 시민이 직접 움직이게 합니다.</p>
+        <span class="tool">문화해설사·시민기록단·마을활동가 양성</span>
+      </li>
+      <li class="step">
+        <span class="no">04</span>
+        <h3>기록·아카이브</h3>
+        <p>과정과 결과를 시민의 이름으로 남깁니다.</p>
+        <span class="tool">마을지 · 구술 기록 · 전시 · 발행물</span>
+      </li>
+      <li class="step">
+        <span class="no">05</span>
+        <h3>환류</h3>
+        <p>기록이 다음 사업과 지역의 자산이 되게 합니다.</p>
+        <span class="tool">연속 발행 · 후속 프로그램</span>
+      </li>
+    </ol>
   </div>
 </section>
 
@@ -421,181 +469,105 @@
     <div class="sec-head">
       <h2 class="sec-title disp">대표 프로젝트</h2>
       <span class="eyebrow">Selected Works</span>
-      <p class="sec-sub">발견이 해온 일 가운데 여섯을 골랐습니다. 카드를 누르면 자세한 내용을, 아래 버튼을 누르면 전체 목록을 볼 수 있습니다.</p>
+      <p class="sec-sub">발견의 방법이 실제로 작동한 일들입니다. 카드를 누르면 자세한 내용을 볼 수 있습니다.</p>
     </div>
     <div class="cases" id="cases">
-      <div class="case" data-cat="train">
+      <div class="case" id="work-cheonggye" data-cat="archive pub">
         <div class="ph">Photo</div>
         <div class="bd">
-          <span class="eyebrow">사람 기르기</span>
-          <h3>문화해설사 양성과정</h3>
-          <span class="org">의왕시평생학습관</span>
-          <details><summary>자세히</summary>
-            <dl><dt>과업</dt><dd>양성과정 커리큘럼 설계·운영, 네트워크 활성화 프로그램</dd></dl>
-          </details>
-          <span class="more-cue">자세히 보기 →</span>
-        </div>
-      </div>
-      <div class="case" data-cat="research archive">
-        <div class="ph">Photo — 상장·발표 사진</div>
-        <div class="bd">
-          <span class="eyebrow">연구 · 학술</span>
-          <h3>시민 참여형 디지털 아카이브 연구</h3>
-          <span class="org">차세대컨버전스정보서비스학회 · 2026 학술우수 논문상</span>
-          <details><summary>자세히</summary>
-            <dl><dt>논문</dt><dd>「시민 참여형 디지털 아카이브의 참여 양상과 권한 배분 — 익산시민역사기록관 '함께 만드는 지도' 사례를 중심으로」. 2026 하계학술대회 우수논문 선정 (2026.08.23).</dd></dl>
-          </details>
-          <span class="more-cue">자세히 보기 →</span>
-        </div>
-      </div>
-      <div class="case" data-cat="archive pub">
-        <div class="ph">Photo</div>
-        <div class="bd">
-          <span class="eyebrow">마을 기록</span>
+          <span class="eyebrow">리서치 · 참여설계 · 기록</span>
           <h3>청계동 마을지</h3>
           <span class="org">주민 참여 마을지·구술사 제작</span>
           <details><summary>자세히</summary>
-            <dl><dt>과업</dt><dd>공동체의 역사와 기억을 주민과 함께 책·기록물로 제작</dd></dl>
+            <dl><dt>과업</dt><dd>공동체의 역사와 기억을 주민과 함께 책·기록물로 제작</dd><dt>결과</dt><dd>주민이 직접 구술하고 만든 마을지</dd></dl>
           </details>
           <span class="more-cue">자세히 보기 →</span>
         </div>
       </div>
-      <div class="case" data-cat="edu">
+      <div class="case" id="work-docent" data-cat="train">
         <div class="ph">Photo</div>
         <div class="bd">
-          <span class="eyebrow">교육</span>
+          <span class="eyebrow">참여설계 · 실행 · 환류</span>
+          <h3>문화해설사 양성과정</h3>
+          <span class="org">의왕시평생학습관</span>
+          <details><summary>자세히</summary>
+            <dl><dt>과업</dt><dd>시민이 지역의 해설 주체가 되는 양성과정 커리큘럼 설계·운영, 네트워크 활성화 프로그램</dd></dl>
+          </details>
+          <span class="more-cue">자세히 보기 →</span>
+        </div>
+      </div>
+      <div class="case" id="work-eco-record" data-cat="archive">
+        <div class="ph">Photo</div>
+        <div class="bd">
+          <span class="eyebrow">리서치 · 참여설계 · 기록</span>
+          <h3>의왕마을생태연구회 시민 생태기록</h3>
+          <span class="org">의왕마을생태연구회 · 진행 중</span>
+          <details><summary>자세히</summary>
+            <dl><dt>과업</dt><dd>주민이 활동의 주체로 남는 시민 기록공동체를 꾸리고 이끕니다.</dd></dl>
+          </details>
+          <span class="more-cue">자세히 보기 →</span>
+        </div>
+      </div>
+      <div class="case" id="work-wangsong-lab" data-cat="edu">
+        <div class="ph">Photo</div>
+        <div class="bd">
+          <span class="eyebrow">리서치 · 실행</span>
           <h3>꿈다락토요문화학교 〈왕송못순환랩〉</h3>
           <span class="org">한국문화예술교육진흥원 · 의왕시중앙도서관</span>
           <details><summary>자세히</summary>
-            <dl><dt>과업</dt><dd>부들이야기·둠벙이야기 참여작가, 지지배배 기획·운영. 교육과 전시 연계.</dd></dl>
+            <dl><dt>과업</dt><dd>지지배배 기획·운영. 부들이야기·둠벙이야기 참여작가. 교육과 전시 연계.</dd></dl>
           </details>
           <span class="more-cue">자세히 보기 →</span>
         </div>
       </div>
-      <div class="case" data-cat="edu">
+      <div class="case" id="work-birding" data-cat="pub">
         <div class="ph">Photo</div>
         <div class="bd">
-          <span class="eyebrow">교육 · 박물관</span>
-          <h3>〈내가 본 이슬람, 유물이 말하는 이슬람〉</h3>
-          <span class="org">국립중앙박물관 이슬람실</span>
+          <span class="eyebrow">기록 · 환류</span>
+          <h3>우리동네 취미탐조 왕송호수</h3>
+          <span class="org">자체 발행 · 5년 연속</span>
           <details><summary>자세히</summary>
-            <dl><dt>과업</dt><dd>소장품 기반 참여형 교육 프로그램·교재 개발</dd></dl>
-          </details>
-          <span class="more-cue">자세히 보기 →</span>
-        </div>
-      </div>
-      <div class="case" data-cat="exhibit">
-        <div class="ph">Photo</div>
-        <div class="bd">
-          <span class="eyebrow">전시·예술</span>
-          <h3>공공예술프로젝트 〈우리마을미술: 월암별곡〉</h3>
-          <span class="org">월암다이어리·월암랩소디 참여작가</span>
-          <details><summary>자세히</summary>
-            <dl><dt>과업</dt><dd>공공예술 프로젝트 참여작가로 작품 제작·운영</dd></dl>
+            <dl><dt>과업</dt><dd>왕송호수의 새들을 관찰하며 동네를 다시 발견하는 취미탐조 안내서. 한 지역을 5년째 기록하고 있습니다.</dd></dl>
           </details>
           <span class="more-cue">자세히 보기 →</span>
         </div>
       </div>
     </div>
     <div style="margin-top: 30px;">
-      <a class="btn fill" href="projects.html">전체 프로젝트 보기 →</a>
+      <a class="btn" href="projects.html">지난 프로젝트 보기 →</a>
     </div>
   </div>
 </section>
 
-<section id="kits" class="dark-sec">
+<section id="insights">
+  <span id="news" aria-hidden="true"></span>
   <div class="wrap sec-inner">
     <div class="sec-head">
-      <h2 class="sec-title disp">역사를 갖고 논다</h2>
-      <span class="eyebrow">Kits &amp; Books</span>
-      <p class="sec-sub">지역의 역사와 이야기를 놀이로 배우는 교구, 그리고 동네를 기록한 책입니다. 교구는 직접 활용하거나 강사가 함께하는 운영 프로그램으로 진행할 수 있습니다.</p>
+      <h2 class="sec-title disp">연구·인사이트</h2>
+      <span class="eyebrow">Research &amp; Insights</span>
+      <p class="sec-sub">시민이 참여자에서 주체로 성장하는 조건을 연구합니다. 현장의 사례가 연구가 되고, 연구가 다시 방법이 됩니다.</p>
     </div>
-    <div class="kits">
-      <div class="kit">
-        <span class="eyebrow">Board Game · Kit 01</span>
-        <h3>경기도 역사탐험 키트</h3>
-        <div class="meta">
-          <span class="chip">한 반 구성 (보드+카드 3세트)</span><span class="chip">지역사</span><span class="chip">학교·도서관·문화기관</span>
-        </div>
-        <p>경기도의 역사와 문화유산을 카드와 보드 위에서 탐험하는 학급용 교구입니다. 한 반 학생들이 모둠별로 나누어 진행할 수 있도록 보드판과 카드 3세트가 한 상자에 들어 있어, 수업에 바로 쓸 수 있습니다.</p>
-        <details>
-          <summary>어떻게 놀고, 무엇을 배우나요?</summary>
-          <p>게임 방법과 교육과정 연계 내용이 들어갈 자리입니다 — 플레이 사진과 "이 게임으로 배우는 것"을 함께 담습니다.</p>
-        </details>
-        <div class="row">
-          <a class="btn naver" href="https://smartstore.naver.com/eddanggomaeul/products/13312945392" target="_blank" rel="noopener">네이버 스마트스토어에서 구매</a>
-          <a class="btn" href="#contact">수업 운영 의뢰</a>
-        </div>
-      </div>
-      <div class="kit">
-        <span class="eyebrow">Activity Kit · Kit 02</span>
-        <h3>내 손으로 그리는 마을지도 키트</h3>
-        <div class="meta">
-          <span class="chip">마을교육</span><span class="chip">지역 탐구 활동</span>
-        </div>
-        <p>우리 동네를 직접 걷고, 보고, 기록하는 지역 탐구 활동 키트입니다. 마을 교육과 공동체 프로그램에 맞춤합니다.</p>
-        <details>
-          <summary>어떻게 활용하나요?</summary>
-          <p>활용 방법과 수업 예시가 들어갈 자리입니다 — 실제 수업 사진과 참여 후기를 함께 담습니다.</p>
-        </details>
-        <div class="row">
-          <a class="btn naver" href="https://smartstore.naver.com/eddanggomaeul/products/13312850030" target="_blank" rel="noopener">네이버 스마트스토어에서 구매</a>
-          <a class="btn" href="#contact">수업 운영 의뢰</a>
-        </div>
-      </div>
-      <div class="kit">
-        <span class="eyebrow">Book · 발행물</span>
-        <h3>우리동네 취미탐조 왕송호수</h3>
-        <div class="meta">
-          <span class="chip">탐조 안내서</span><span class="chip">출간 5년 스테디</span>
-        </div>
-        <p>왕송호수의 새들을 관찰하며 동네를 다시 발견하는 취미탐조 안내서. 5년째 꾸준히 읽히고 있는 발견의 대표 발행물입니다.</p>
-        <details>
-          <summary>어떤 책인가요?</summary>
-          <p>책 소개와 목차, 독자 후기가 들어갈 자리입니다.</p>
-        </details>
-        <div class="row">
-          <a class="btn naver" href="https://smartstore.naver.com/eddanggomaeul/products/5246498329" target="_blank" rel="noopener">네이버 스마트스토어에서 구매</a>
-          <a class="btn" href="https://smartstore.naver.com/eddanggomaeul/products/5072936785" target="_blank" rel="noopener">탐조수첩 스티커</a>
-        </div>
-      </div>
+    <div class="paper" id="insight-paper">
+      <span class="eyebrow">Paper · 2026.08.23</span>
+      <h3>시민 참여형 디지털 아카이브의 참여 양상과 권한 배분</h3>
+      <p>익산시민역사기록관 ‘함께 만드는 지도’ 사례를 중심으로</p>
+      <span class="award">차세대컨버전스정보서비스학회 2026 하계학술대회 학술우수 논문상</span>
     </div>
-    <div class="group-buy">
-      <div>
-        <h3>단체·기관 구매 안내</h3>
-        <p>세금계산서 발행, 수량 견적, 교구+강사 출강 결합 프로그램 모두 가능합니다. 학교·도서관·지자체 담당자님은 이메일로 문의 주세요.</p>
-      </div>
-      <a class="btn sm" href="mailto:artlab.balgyeon@gmail.com">단체 구매 문의</a>
-    </div>
-  </div>
-</section>
-
-<section id="news">
-  <div class="wrap sec-inner">
-    <div class="sec-head">
-      <h2 class="sec-title disp">지금, 발견</h2>
-      <span class="eyebrow">News</span>
-    </div>
-    <div class="news-list">
-      <a class="news-item" href="projects.html#research">
-        <span class="date">2026.08.23</span>
-        <span class="title">차세대컨버전스정보서비스학회 2026 하계학술대회 <b>학술우수 논문상</b> 수상 — 시민 참여형 디지털 아카이브의 참여 양상과 권한 배분 연구</span>
-        <span class="cat">연구</span>
-      </a>
+    <div class="news-list" style="margin-top:28px;">
       <div class="news-item">
-        <span class="date">2026.08.—</span>
-        <span class="title">정기 프로그램 참가자 모집 — 신청 링크가 들어갈 자리입니다</span>
-        <span class="cat">모집</span>
+        <span class="date">준비 중</span>
+        <span class="title">시민이 참가자에서 주체가 되는 조건</span>
+        <span class="cat">글</span>
       </div>
       <div class="news-item">
-        <span class="date">2026.—.—</span>
-        <span class="title">최근 활동 소식이 들어갈 자리 — 날짜가 찍힌 소식이 쌓이는 것 자체가 신뢰가 됩니다</span>
-        <span class="cat">활동</span>
+        <span class="date">준비 중</span>
+        <span class="title">행정은 어디까지 지원하고 어디서 물러나야 하는가</span>
+        <span class="cat">글</span>
       </div>
       <div class="news-item">
-        <span class="date">2026.—.—</span>
-        <span class="title">발행물·보고서 소식 자리 — 《왕송호수 담은 수첩》, 『우리동네 취미탐조 왕송호수』 등</span>
-        <span class="cat">발행</span>
+        <span class="date">준비 중</span>
+        <span class="title">중간기획자는 무엇을 해야 하는가</span>
+        <span class="cat">글</span>
       </div>
     </div>
   </div>
@@ -613,19 +585,18 @@
   </div>
 </section>
 
-<section id="contact" style="border-bottom:none;">
+<section id="contact">
   <div class="wrap sec-inner">
     <div class="contact-grid">
       <div class="contact-copy">
-        <span class="eyebrow">Contact &amp; Collaboration</span>
-        <h2 class="disp"><a href="mailto:artlab.balgyeon@gmail.com">같이 발견합시다 →</a></h2>
-        <p>혼자서는 찾기 어려웠던 우리 동네의 매력, 기관·기업이 원하는 문화예술의 가치를 함께 찾아보세요. 작은 아이디어 제안부터 프로젝트 협업, 기획 의뢰까지 가볍게 문을 두드려 주세요.</p>
+        <span class="eyebrow">Contact · 의뢰하기</span>
+        <h2 class="disp"><a href="mailto:artlab.balgyeon@gmail.com">의뢰하기 →</a></h2>
+        <p>검토 중인 사업이 있다면, 기획 단계부터 이야기해 주세요. 정리되지 않은 아이디어여도 괜찮습니다. 누가 참여하고 무엇을 남길지부터 함께 진단합니다.</p>
         <div class="contact-ways">
           <span><b>Email</b><a href="mailto:artlab.balgyeon@gmail.com">artlab.balgyeon@gmail.com</a></span>
           <span><b>Tel</b><a href="tel:01051227236">010-5122-7236</a></span>
           <span><b>Address</b>안양시 동안구 시민대로 230, B-3808</span>
         </div>
-        <a class="btn sm" href="#" aria-disabled="true">연구소 소개자료(PDF) 내려받기</a>
       </div>
       <form class="cform" action="https://formsubmit.co/artlab.balgyeon@gmail.com" method="POST">
         <input type="hidden" name="_subject" value="[커뮤니티아트랩 발견 홈페이지] 새 문의가 도착했습니다">
@@ -638,15 +609,62 @@
         <label>연락처
           <input type="text" name="연락처" placeholder="이메일 또는 전화번호" required>
         </label>
-        <label>어떤 일을 검토 중이신가요?
-          <input type="text" name="검토 중인 일" placeholder="예) 강사 양성과정 / 마을기록 사업 / 교구 단체구매">
+        <label>의뢰 유형
+          <select name="의뢰 유형">
+            <option>참여구조 진단·기획 자문</option>
+            <option>참여 프로그램 설계·운영</option>
+            <option>시민 주체 양성과정</option>
+            <option>기록·아카이브 (마을지, 구술, 시민 아카이브)</option>
+            <option>기타 (특강·워크숍, 교구 단체 구매)</option>
+          </select>
+        </label>
+        <label>어떤 사업을 검토 중이신가요?
+          <input type="text" name="검토 중인 일" placeholder="예) 주민참여 마을기록 사업 / 시민기록단 양성">
         </label>
         <label>내용
           <textarea name="문의 내용" placeholder="편하게 적어 주세요. 정리되지 않은 아이디어도 좋습니다."></textarea>
         </label>
-        <button type="submit">문의 보내기</button>
-        <p class="note">보내주신 문의는 이메일로 접수되며, 확인 후 회신드립니다.</p>
+        <button type="submit">의뢰 보내기</button>
+        <p class="note">보내주신 내용은 이메일로 접수되며, 확인 후 회신드립니다.</p>
       </form>
+    </div>
+  </div>
+</section>
+
+<section id="kits" class="dark-sec" style="border-bottom:none;">
+  <span id="footer-kits" aria-hidden="true"></span>
+  <div class="wrap sec-inner">
+    <div class="sec-head">
+      <h2 class="sec-title disp" style="font-size:clamp(1.5rem,3.4vw,2.2rem);">교구·발행물</h2>
+      <span class="eyebrow">Kits &amp; Books</span>
+      <p class="sec-sub">지역을 읽는 도구와 기록의 결과물입니다. 단체·기관 구매는 세금계산서 발행, 수량 견적이 가능합니다.</p>
+    </div>
+    <div class="kits">
+      <div class="kit">
+        <span class="eyebrow">Activity Kit · Kit 02</span>
+        <h3>내 손으로 그리는 마을지도 키트</h3>
+        <p>우리 동네를 직접 걷고, 보고, 기록하는 지역 탐구 활동 키트입니다.</p>
+        <div class="row">
+          <a class="btn naver sm" href="https://smartstore.naver.com/eddanggomaeul/products/13312850030" target="_blank" rel="noopener">스마트스토어</a>
+        </div>
+      </div>
+      <div class="kit">
+        <span class="eyebrow">Book · 발행물</span>
+        <h3>우리동네 취미탐조 왕송호수</h3>
+        <p>왕송호수의 새들을 관찰하며 동네를 다시 발견하는 취미탐조 안내서.</p>
+        <div class="row">
+          <a class="btn naver sm" href="https://smartstore.naver.com/eddanggomaeul/products/5246498329" target="_blank" rel="noopener">스마트스토어</a>
+          <a class="btn sm" href="https://smartstore.naver.com/eddanggomaeul/products/5072936785" target="_blank" rel="noopener">탐조수첩 스티커</a>
+        </div>
+      </div>
+      <div class="kit">
+        <span class="eyebrow">Board Game · Kit 01</span>
+        <h3>경기도 역사탐험 키트</h3>
+        <p>경기도의 역사와 문화유산을 카드와 보드 위에서 탐험하는 학급용 교구.</p>
+        <div class="row">
+          <a class="btn naver sm" href="https://smartstore.naver.com/eddanggomaeul/products/13312945392" target="_blank" rel="noopener">스마트스토어</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -656,7 +674,8 @@
     <div class="org">
       <b>커뮤니티아트랩 발견</b>
       커뮤니티아트랩 발견 · Community Artlab Balgyeon<br>
-      우리 동네의 숨은 가치를 예술로 연결하는 문화예술연구소
+      지역을 읽고 사람의 참여를 설계하는 지역문화 연구소<br>
+      <a href="map.html">발견의 지도</a> · <a href="projects.html">지난 프로젝트</a>
     </div>
     <div class="admin">
       대표: 김은지<br>
